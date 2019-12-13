@@ -25,6 +25,7 @@ import com.samahmakki.seacrhforbooks.classes.Adapter;
 import com.samahmakki.seacrhforbooks.classes.Book;
 import com.samahmakki.seacrhforbooks.classes.BookAdapter;
 import com.samahmakki.seacrhforbooks.classes.QueryUtils;
+import com.samahmakki.seacrhforbooks.fragments.SavedBooksFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.custom_actionbar);
         getSupportActionBar().setElevation(0);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
 
         Adapter adapter = new Adapter(MainActivity.this, getSupportFragmentManager());
 
         viewPager.setAdapter(adapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
 
         tabLayout.setupWithViewPager(viewPager);
     }

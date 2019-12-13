@@ -1,6 +1,5 @@
 package com.samahmakki.seacrhforbooks.fragments;
 
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,8 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,21 +36,35 @@ public class SavedBooksFragment extends Fragment {
     private BookAdapter mAdapter;
     private TextView mEmptyStateTextView2;
     int selectedItem;
-
+    Intent intent;
 
     public SavedBooksFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // Refresh your fragment here
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_saved_books, container, false);
-        mEmptyStateTextView2 = rootView.findViewById(R.id.saved_empty_view);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_saved_books, container, false);
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View rootView, @Nullable Bundle savedInstanceState) {
+
+        mEmptyStateTextView2 = rootView.findViewById(R.id.saved_empty_view);
         BookDbHelper mBillHelper = new BookDbHelper(rootView.getContext());
+
 
         final SQLiteDatabase db = mBillHelper.getReadableDatabase();
         String[] projection = {
@@ -139,7 +153,7 @@ public class SavedBooksFragment extends Fragment {
         savedBookListView.setEmptyView(mEmptyStateTextView2);
         mEmptyStateTextView2.setText("No Saved Books Yet...");
 
-        return rootView;
+        super.onViewCreated(rootView, savedInstanceState);
     }
 
 }

@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.samahmakki.seacrhforbooks.MainActivity;
 import com.samahmakki.seacrhforbooks.R;
 import com.samahmakki.seacrhforbooks.classes.Book;
 import com.samahmakki.seacrhforbooks.classes.BookAdapter;
@@ -51,6 +50,7 @@ public class SearchBooksFragment extends Fragment {
     public SearchBooksFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
@@ -100,6 +100,7 @@ public class SearchBooksFragment extends Fragment {
                                             currentBook.getBitmap(), currentBook.getPublishedDate(), currentBook.getLink());
                                     if (newRowId == -1) {
                                         Toast.makeText(getContext(), "Save it again", Toast.LENGTH_SHORT).show();
+
                                     } else {
                                         Toast.makeText(getContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                                     }

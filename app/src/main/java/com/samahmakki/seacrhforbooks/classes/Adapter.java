@@ -42,4 +42,5 @@ public class Adapter extends FragmentPagerAdapter {
             return mContext.getString(R.string.saved);
         }
     }
+
 }
