@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\search for books under development\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lo\\values-lo.xml",
+            "outputFile": "D:\\Search for books app\\search for books under development\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lo\\values-lo.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\5a3be19da79cfdbef19a70568cadebea\\play-services-basement-15.0.1\\res\\values-lo\\values.xml",

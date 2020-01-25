@@ -36,7 +36,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id_ac">
+            ads:adUnitId="@string/banner_ad_unit_id_ac_saved">
         </com.google.android.gms.ads.AdView>
     </RelativeLayout>
 </ScrollView>

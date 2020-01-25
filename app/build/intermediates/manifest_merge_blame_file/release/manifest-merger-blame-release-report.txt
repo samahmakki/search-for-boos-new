@@ -1,0 +1,126 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.samahmakki.seacrhforbooksandsave"
+4    android:versionCode="5"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:5:5-79
+11-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:5:22-76
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:6:5-67
+12-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:6:22-64
+13
+14    <application
+14-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:8:5-24:19
+15        android:allowBackup="true"
+15-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:9:9-35
+16        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+16-->[com.android.support:support-compat:28.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\b73d0db3c489aeab8b531c92b0313ef9\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+17        android:icon="@mipmap/icon"
+17-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:10:9-36
+18        android:label="@string/app_name"
+18-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:11:9-41
+19        android:roundIcon="@mipmap/icon"
+19-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:12:9-41
+20        android:supportsRtl="true"
+20-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:13:9-35
+21        android:theme="@style/AppTheme" >
+21-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:14:9-40
+22        <activity
+22-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:15:9-23:20
+23            android:name="com.samahmakki.seacrhforbooksandsave.MainActivity"
+23-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:16:13-77
+24            android:configChanges="screenSize|orientation" >
+24-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:17:13-59
+25            <intent-filter>
+25-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:18:13-22:29
+26                <action android:name="android.intent.action.MAIN" />
+26-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:19:17-69
+26-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:19:25-66
+27
+28                <category android:name="android.intent.category.LAUNCHER" />
+28-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:21:17-77
+28-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:21:27-74
+29            </intent-filter>
+30        </activity>
+31        <activity
+31-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:29:9-32:66
+32            android:name="com.facebook.FacebookActivity"
+32-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:30:13-57
+33            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+33-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:31:13-96
+34            android:theme="@style/com_facebook_activity_theme" />
+34-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:32:13-63
+35        <activity android:name="com.facebook.CustomTabMainActivity" />
+35-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:33:9-71
+35-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:33:19-68
+36        <activity android:name="com.facebook.CustomTabActivity" />
+36-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:34:9-67
+36-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:34:19-64
+37
+38        <provider
+38-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:8:9-11:40
+39            android:name="com.squareup.picasso.PicassoProvider"
+39-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:9:13-64
+40            android:authorities="com.samahmakki.seacrhforbooksandsave.com.squareup.picasso"
+40-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:10:13-72
+41            android:exported="false" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+41-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:11:13-37
+42        <activity
+42-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:29:9-33:64
+43            android:name="com.google.android.gms.ads.AdActivity"
+43-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:30:13-65
+44            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+44-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:31:13-122
+45            android:exported="false"
+45-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:32:13-37
+46            android:theme="@android:style/Theme.Translucent" />
+46-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:33:13-61
+47
+48        <meta-data
+48-->[com.google.android.gms:play-services-basement:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\5a3be19da79cfdbef19a70568cadebea\play-services-basement-15.0.1\AndroidManifest.xml:23:9-25:69
+49            android:name="com.google.android.gms.version"
+49-->[com.google.android.gms:play-services-basement:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\5a3be19da79cfdbef19a70568cadebea\play-services-basement-15.0.1\AndroidManifest.xml:24:13-58
+50            android:value="@integer/google_play_services_version" />
+50-->[com.google.android.gms:play-services-basement:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\5a3be19da79cfdbef19a70568cadebea\play-services-basement-15.0.1\AndroidManifest.xml:25:13-66
+51        <!--
+52         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+53         with the application context. This config is merged in with the host app's manifest,
+54         but there can only be one provider with the same authority activated at any given
+55         point; so if the end user has two or more different apps that use Facebook SDK, only the
+56         first one will be able to use the provider. To work around this problem, we use the
+57         following placeholder in the authority to identify each host application as if it was
+58         a completely different provider.
+59        -->
+60        <provider
+60-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:39:9-42:40
+61            android:name="com.facebook.internal.FacebookInitProvider"
+61-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:40:13-70
+62            android:authorities="com.samahmakki.seacrhforbooksandsave.FacebookInitProvider"
+62-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:41:13-72
+63            android:exported="false" />
+63-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:42:13-37
+64
+65        <receiver
+65-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:44:9-50:20
+66            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+66-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:45:13-86
+67            android:exported="false" >
+67-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:46:13-37
+68            <intent-filter>
+68-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:47:13-49:29
+69                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+69-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:48:17-95
+69-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:48:25-92
+70            </intent-filter>
+71        </receiver>
+72    </application>
+73
+74</manifest>

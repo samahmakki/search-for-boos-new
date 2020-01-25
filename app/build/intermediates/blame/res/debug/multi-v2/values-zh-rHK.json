@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\search for books under development\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rHK\\values-zh-rHK.xml",
+            "outputFile": "D:\\Search for books app\\search for books under development\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rHK\\values-zh-rHK.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\c87f43980ffc88135efe24fd9f24e9ba\\play-services-ads-15.0.1\\res\\values-zh-rHK\\values.xml",

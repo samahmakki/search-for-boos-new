@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.samahmakki.seacrhforbooks.test" >
+    package="com.samahmakki.seacrhforbooksandsave.test" >
 
     <uses-sdk
         android:minSdkVersion="19"
@@ -10,8 +10,8 @@
         android:name="android.support.test.runner.AndroidJUnitRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for com.samahmakki.seacrhforbooks"
-        android:targetPackage="com.samahmakki.seacrhforbooks" />
+        android:label="Tests for com.samahmakki.seacrhforbooksandsave"
+        android:targetPackage="com.samahmakki.seacrhforbooksandsave" />
 
     <application android:debuggable="true" >
         <uses-library android:name="android.test.runner" />

@@ -1,4 +1,4 @@
-#Fri Dec 13 16:52:06 EET 2019
-base.0=D\:\\search for books under development\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+#Fri Jan 24 10:29:24 EET 2020
+base.0=D\:\\Search for books app\\search for books under development\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

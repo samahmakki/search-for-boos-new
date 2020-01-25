@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\search for books under development\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-id\\values-id.xml",
+            "outputFile": "D:\\Search for books app\\search for books under development\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-id\\values-id.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\a0c25d1319ae8401ec39334586f1034e\\facebook-common-4.42.0\\res\\values-id\\values-id.xml",
