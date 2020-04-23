@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds" >
+        <attr name="backgroundcolor" format="color" />
+        <attr name="textcolor" format="color" />
+        <attr name="specialbackgroundcolor" format="color" />
+        <attr name="cardbackgroundcolor_1" format="color" />
+        <attr name="tintcolor" format="color" />
+        <attr name="currentbackgroundcolor" format="color" />
+        <attr name="bottomnavigationcolor" format="color" />
+        <attr name="buttoncolor" format="color" />
+        <attr name="emptystatecolor" format="color" />
+        <attr name="selecteditemcolor" format="color" />
+        <attr name="titlegoal" format="color" />
+        <attr name="listview" format="color" />
+        <attr name="FloatingActionButton" format="color" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_person_pin_circle_black_24dp"
+            android:title="@string/tramps" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_perm_device_information_black_24dp"
+            android:title="@string/about" />
+    <!--    <item
+            android:id="@+id/nav_faq"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="FAQ" />-->
+        <item
+            android:id="@+id/nav_homed"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/homed_in_organizations" />
+        <item
+            android:id="@+id/nav_charitable"
+            android:icon="@drawable/ic_account_balance_black_24dp"
+            android:title="@string/charitable_organizations" />
+
+        <item
+            android:id="@+id/nav_developers"
+            android:icon="@drawable/ic_developer_mode_black_24dp"
+            android:title="@string/developers" />
+
+    </group>
+
+    <item android:title="@string/tools">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/share" />
+            <item
+                android:id="@+id/nav_rate"
+                android:icon="@drawable/ic_star_half_black_24dp"
+                android:title="@string/rate_s" />
+
+        </menu>
+    </item>
+    <!--<item android:title="Our Donors">
+        <menu>
+            <item
+                android:id="@+id/aDonate"
+                android:icon="@drawable/ic_attach_money_black_24dp"
+                android:title="Donate to watch the video" />
+
+            <item
+                android:id="@+id/nav_supporting"
+                android:icon="@drawable/ic_people_black_24dp"
+                android:title="US SUPPORTING" />
+        </menu>
+    </item>-->
+    <item android:title="@string/sign_out">
+        <menu>
+            <item
+                android:id="@+id/nav_out"
+                android:icon="@drawable/ic_menu_out"
+                android:title="@string/sign_out" />
+
+
+        </menu>
+    </item>
+
+</menu>
