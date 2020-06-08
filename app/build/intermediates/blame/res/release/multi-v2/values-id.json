@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Search for books app\\search for books under development\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-id\\values-id.xml",
+            "outputFile": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-id\\values-id.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\a0c25d1319ae8401ec39334586f1034e\\facebook-common-4.42.0\\res\\values-id\\values-id.xml",
+                    "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\ef1adc9441c212d43f8c1b8d96123e14\\jetified-facebook-common-4.42.0\\res\\values-id\\values-id.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

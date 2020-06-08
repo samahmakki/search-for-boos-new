@@ -7,12 +7,22 @@
         <attr name="cardbackgroundcolor_1" format="color" />
         <attr name="tintcolor" format="color" />
         <attr name="currentbackgroundcolor" format="color" />
-        <attr name="bottomnavigationcolor" format="color" />
+        <attr name="navigationcolor" format="color" />
         <attr name="buttoncolor" format="color" />
         <attr name="emptystatecolor" format="color" />
         <attr name="selecteditemcolor" format="color" />
         <attr name="titlegoal" format="color" />
         <attr name="listview" format="color" />
-        <attr name="FloatingActionButton" format="color" />
+        <attr name="FloatingActionButton" format="color"/>
+        <attr name="tabscolor" format="color"/>
+        <attr name="navigationheader" format="color"/>
+        <attr name="navigationheadertext" format="color"/>
+        <attr name="navigationicon" format="color"/>
+        <attr name="bookNameText" format="color"/>
+        <attr name="authorNameText" format="color"/>
+        <attr name="bookInfoBackground" format="color"/>
+        <attr name="publishedDateanddesc" format="color"/>
+        <attr name="addButton" format="color"/>
+        <attr name="search_btn" format="color"/>
     </declare-styleable>
 </resources>

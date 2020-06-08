@@ -5,26 +5,217 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="tabscolor">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        // Intent between activity
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="backgroundcolor">#e4e4e4</item>
+        <item name="navigationheader">#d7e2e4</item>
+        <item name="tintcolor">#aaa</item>
+        <item name="textcolor">@android:color/black</item>
+        <item name="cardbackgroundcolor_1">#ffffff</item>
+        <item name="specialbackgroundcolor">#28aaaaaa</item>
+        <item name="currentbackgroundcolor">@color/colorPrimary</item>
+        <item name="navigationcolor">#fdfeff</item>
+        <item name="selecteditemcolor">#f0ffff</item>
+        <item name="buttoncolor">#2196F3</item>
+        <item name="emptystatecolor">#2d6ca4</item>
+        <item name="titlegoal">#28a1d3</item>
+        <item name="listview">#ffffff</item>
+        <item name="FloatingActionButton">@color/colorPrimary</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="navigationheadertext">#0035bf</item>
+        <item name="navigationicon">@color/itemIconTint</item>
+        <item name="bookNameText">#0032e0</item>
+        <item name="authorNameText">#003cf0</item>
+        <item name="bookInfoBackground">#e4e4e4</item>
+        <item name="publishedDateanddesc">#000000</item>
+        <item name="addButton">#f00000</item>
+        <item name="search_btn">#0032e0</item>
     </style>
+
+
+    <!-- Night / dark  Mode theme. -->
+    <style name="darktheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#3b393c</item>
+        <item name="colorPrimaryDark">#181617</item>
+        <item name="tabscolor">#3b393c</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundcolor">#1e1e1e</item>
+        <item name="tintcolor">#aaa</item>
+        <item name="selecteditemcolor">#f0ffff</item>
+        <item name="navigationcolor">#444444</item>
+        <item name="currentbackgroundcolor">#3b393c</item>
+        <item name="cardbackgroundcolor_1">#3b393c</item>
+        <item name="textcolor">@android:color/white</item>
+        <item name="specialbackgroundcolor">#181617</item>
+        <item name="buttoncolor">#2196F3</item>
+        <item name="emptystatecolor">#2d6ca4</item>
+        <item name="titlegoal">#3c3a3d</item>
+        <item name="listview">#797979</item>
+        <item name="navigationheader">#303030</item>
+        <item name="FloatingActionButton">#ffffff</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:popupMenuStyle">@style/PopupMenudark</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:itemBackground">@color/cardview_dark_background</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="navigationheadertext">#99ccff</item>
+        <item name="navigationicon">#ffffff</item>
+        <item name="bookNameText">#ffffff</item>
+        <item name="authorNameText">#99ccff</item>
+        <item name="bookInfoBackground">#1e1e1e</item>
+        <item name="publishedDateanddesc">#ffffff</item>
+        <item name="addButton">#99ccff</item>
+        <item name="search_btn">#99ccff</item>
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+
+    </style>
+
+    <style name="PopupMenulight" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">#EBE9E9</item>
+    </style>
+
+    <style name="PopupMenudark" parent="@android:style/Widget.PopupMenu">
+
+        <item name="android:popupBackground">#3c3a3d</item>
+        <item name="android:textColor">#FF01F0</item>
+        <item name="android:textSize">12sp</item>
+
+    </style>
+
+    <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
+        <item name="android:textColor">#BDBBBB</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:popupBackground">#3c3a3d</item>
+    </style>
+
 
     <!-- Style for a tab that displays a category name -->
     <style name="CategoryTab" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@android:color/white</item>
         <item name="tabSelectedTextColor">@android:color/white</item>
         <item name="tabTextAppearance">@style/CategoryTabTextAppearance</item>
-
         <item name="tabGravity">fill</item>
         <item name="tabMode">fixed</item>
         <item name="tabMaxWidth">0dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-
     </style>
 
     <!-- Text appearance style for a category tab -->
     <style name="CategoryTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">#b2d1ff</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeno" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        // Intent between activity
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme2" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="tabscolor">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        // Intent between activity
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="backgroundcolor">#e4e4e4</item>
+        <item name="navigationheader">#d7e2e4</item>
+        <item name="tintcolor">#aaa</item>
+        <item name="textcolor">@android:color/black</item>
+        <item name="cardbackgroundcolor_1">#ffffff</item>
+        <item name="specialbackgroundcolor">#28aaaaaa</item>
+        <item name="currentbackgroundcolor">@color/colorPrimary</item>
+        <item name="navigationcolor">#fdfeff</item>
+        <item name="selecteditemcolor">#f0ffff</item>
+        <item name="buttoncolor">#2196F3</item>
+        <item name="emptystatecolor">#2d6ca4</item>
+        <item name="titlegoal">#28a1d3</item>
+        <item name="listview">#ffffff</item>
+        <item name="FloatingActionButton">@color/colorPrimary</item>
+        <item name="windowNoTitle">false</item>
+        <item name="windowActionBar">true</item>
+        <item name="navigationheadertext">#0035bf</item>
+        <item name="navigationicon">@color/itemIconTint</item>
+        <item name="bookNameText">#0032e0</item>
+        <item name="authorNameText">#003cf0</item>
+        <item name="bookInfoBackground">#e4e4e4</item>
+        <item name="publishedDateanddesc">#000000</item>
+        <item name="addButton">#f00000</item>
+    </style>
+
+
+    <!-- Night / dark  Mode theme. -->
+    <style name="darktheme2" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#3b393c</item>
+        <item name="colorPrimaryDark">#181617</item>
+        <item name="tabscolor">#3b393c</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundcolor">#1e1e1e</item>
+        <item name="tintcolor">#aaa</item>
+        <item name="selecteditemcolor">#f0ffff</item>
+        <item name="navigationcolor">#444444</item>
+        <item name="currentbackgroundcolor">#3b393c</item>
+        <item name="cardbackgroundcolor_1">#3b393c</item>
+        <item name="textcolor">@android:color/white</item>
+        <item name="specialbackgroundcolor">#181617</item>
+        <item name="buttoncolor">#2196F3</item>
+        <item name="emptystatecolor">#2d6ca4</item>
+        <item name="titlegoal">#3c3a3d</item>
+        <item name="listview">#797979</item>
+        <item name="navigationheader">#303030</item>
+        <item name="FloatingActionButton">#ffffff</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:popupMenuStyle">@style/PopupMenudark</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:itemBackground">@color/cardview_dark_background</item>
+        <item name="windowNoTitle">false</item>
+        <item name="windowActionBar">true</item>
+        <item name="navigationheadertext">#99ccff</item>
+        <item name="navigationicon">#ffffff</item>
+        <item name="bookNameText">#ffffff</item>
+        <item name="authorNameText">#99ccff</item>
+        <item name="bookInfoBackground">#1e1e1e</item>
+        <item name="publishedDateanddesc">#ffffff</item>
+        <item name="addButton">#99ccff</item>
     </style>
 
 </resources>

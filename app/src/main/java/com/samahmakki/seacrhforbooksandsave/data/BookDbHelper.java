@@ -5,23 +5,20 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
-
+import android.graphics.ImageDecoder;
 import com.samahmakki.seacrhforbooksandsave.data.BookContract.BookEntry;
 
 import java.io.ByteArrayOutputStream;
-
 
 public class BookDbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "book.db";
 
-    private static final int DATABASE_VERSION = 2;
-
+    private static final int DATABASE_VERSION = 8;
 
     public BookDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -31,6 +28,10 @@ public class BookDbHelper extends SQLiteOpenHelper {
                 + BookEntry.COLUMN_AUTHOR_NAME + " TEXT, "
                 + BookEntry.COLUMN_BOOK_IMAGE + " BLOB, "
                 + BookEntry.COLUMN_PUBLISHED_DATE + " TEXT, "
+                + BookEntry.COLUMN_BOOK_DESCRIPTION + " TEXT, "
+                + BookEntry.COLUMN_BOOK_SALEABILITY + " TEXT, "
+                + BookEntry.COLUMN_BOOK_BUY_LINK + " TEXT, "
+                + BookEntry.COLUMN_BOOK_WEB_READER_LINK + " TEXT, "
                 + BookEntry.COLUMN_BOOK_LINK + " TEXT);";
 
         db.execSQL(SQL_CREATE_PETS_TABLE);
@@ -45,25 +46,55 @@ public class BookDbHelper extends SQLiteOpenHelper {
     //insert data into the Books Table
 
     final public long insertBook (String bookName, String authorName, Bitmap image,
-                                  String date, String link) {
+                                  String date, String link, String description,
+                                  String saleability, String buyLink, String webReaderLink) {
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
+        long newRowId = 0;
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (image != null) {
+            image.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-        ContentValues values = new ContentValues();
+            byte[] byteArray = stream.toByteArray();
 
-        values.put(BookEntry.COLUMN_Book_NAME, bookName);
-        values.put(BookEntry.COLUMN_AUTHOR_NAME, authorName);
-        values.put(BookEntry.COLUMN_BOOK_IMAGE, byteArray);
-        values.put(BookEntry.COLUMN_PUBLISHED_DATE, date);
-        values.put(BookEntry.COLUMN_BOOK_LINK, link);
+            SQLiteDatabase db = this.getWritableDatabase();
 
-        long newRowId = db.insert(BookEntry.TABLE_NAME, null, values);
+            ContentValues values = new ContentValues();
 
-        db.close();
+            values.put(BookEntry.COLUMN_Book_NAME, bookName);
+            values.put(BookEntry.COLUMN_AUTHOR_NAME, authorName);
+            values.put(BookEntry.COLUMN_BOOK_IMAGE, byteArray);
+            values.put(BookEntry.COLUMN_PUBLISHED_DATE, date);
+            values.put(BookEntry.COLUMN_BOOK_LINK, link);
+            values.put(BookEntry.COLUMN_BOOK_DESCRIPTION, description);
+            values.put(BookEntry.COLUMN_BOOK_SALEABILITY, saleability);
+            values.put(BookEntry.COLUMN_BOOK_BUY_LINK, buyLink);
+            values.put(BookEntry.COLUMN_BOOK_WEB_READER_LINK, webReaderLink);
+
+            newRowId = db.insert(BookEntry.TABLE_NAME, null, values);
+
+            db.close();
+        }
+
+        if (image == null){
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+
+            values.put(BookEntry.COLUMN_Book_NAME, bookName);
+            values.put(BookEntry.COLUMN_AUTHOR_NAME, authorName);
+            values.put(BookEntry.COLUMN_PUBLISHED_DATE, date);
+            values.put(BookEntry.COLUMN_BOOK_LINK, link);
+            values.put(BookEntry.COLUMN_BOOK_DESCRIPTION, description);
+            values.put(BookEntry.COLUMN_BOOK_SALEABILITY, saleability);
+            values.put(BookEntry.COLUMN_BOOK_BUY_LINK, buyLink);
+            values.put(BookEntry.COLUMN_BOOK_WEB_READER_LINK, webReaderLink);
+
+            newRowId = db.insert(BookEntry.TABLE_NAME, null, values);
+
+            db.close();
+        }
+
         return newRowId;
     }
 

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="4dp">
+    android:paddingBottom="4dp"
+    android:background="@drawable/list_item_view">
 
     <TextView
         android:id="@+id/book_name"
@@ -15,7 +16,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="2dp"
         android:padding="4dp"
-        android:textColor="#0032e0"
+        android:textColor="?attr/bookNameText"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:text="Book Name" />
@@ -27,8 +28,8 @@
 
         <ImageView
             android:id="@+id/book_image"
-            android:layout_width="55dp"
-            android:layout_height="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="4dp"
             tools:src="@drawable/ic_launcher_background"
@@ -50,7 +51,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:padding="2dp"
-                android:textColor="#003cf0"
+                android:textColor="?attr/authorNameText"
                 android:textSize="15sp"
                 tools:text="author name" />
 
@@ -64,7 +65,8 @@
                 android:padding="2dp"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                tools:text="date" />
+                tools:text="date"
+                android:layout_gravity="end"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

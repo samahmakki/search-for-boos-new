@@ -2,20 +2,20 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape android:shape="oval">
-            <solid android:color="#f7757c" />
+            <solid android:color="?attr/addButton" />
 
             <stroke android:width="3dp"
-                android:color="#f7757c" />
+                android:color="?attr/addButton" />
         </shape>
     </item>
 
     <item android:state_pressed="true">
         <shape android:shape="oval">
 
-            <solid android:color="#f9876e" />
+            <solid android:color="?attr/addButton" />
 
             <stroke android:width="4dp"
-                android:color="#f7757c" />
+                android:color="?attr/addButton" />
         </shape>
     </item>
 </selector>

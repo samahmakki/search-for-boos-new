@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthorsActivity">
+    android:fillViewport="true"
+    tools:context=".rubbish.AuthorsActivity"
+    tools:showIn="@layout/app_bar_home"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="#e4e4e4">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/auth_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:dividerHeight="4dp"
+            android:divider="@android:color/transparent"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp">
+        </ListView>
+
+        <Button
+            android:id="@+id/add_auth_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:background="@drawable/add_button"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="#ffffff"
+            android:textSize="25dp">
+        </Button>
+    </RelativeLayout>
+</ScrollView>

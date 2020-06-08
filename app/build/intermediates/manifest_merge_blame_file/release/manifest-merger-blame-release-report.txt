@@ -1,126 +1,294 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.samahmakki.seacrhforbooksandsave"
-4    android:versionCode="5"
+4    android:versionCode="16"
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="19"
-8-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="28" />
-9-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml
+8        android:minSdkVersion="22"
+8-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-11-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:5:5-79
-11-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:5:22-76
+11-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:5:5-79
+11-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:5:22-76
 12    <uses-permission android:name="android.permission.INTERNET" />
-12-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:6:5-67
-12-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:6:22-64
-13
-14    <application
-14-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:8:5-24:19
-15        android:allowBackup="true"
-15-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:9:9-35
-16        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
-16-->[com.android.support:support-compat:28.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\b73d0db3c489aeab8b531c92b0313ef9\support-compat-28.0.0\AndroidManifest.xml:22:18-91
-17        android:icon="@mipmap/icon"
-17-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:10:9-36
-18        android:label="@string/app_name"
-18-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:11:9-41
-19        android:roundIcon="@mipmap/icon"
-19-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:12:9-41
-20        android:supportsRtl="true"
-20-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:13:9-35
-21        android:theme="@style/AppTheme" >
-21-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:14:9-40
-22        <activity
-22-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:15:9-23:20
-23            android:name="com.samahmakki.seacrhforbooksandsave.MainActivity"
-23-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:16:13-77
-24            android:configChanges="screenSize|orientation" >
-24-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:17:13-59
-25            <intent-filter>
-25-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:18:13-22:29
-26                <action android:name="android.intent.action.MAIN" />
-26-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:19:17-69
-26-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:19:25-66
-27
-28                <category android:name="android.intent.category.LAUNCHER" />
-28-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:21:17-77
-28-->D:\Search for books app\search for books under development\app\src\main\AndroidManifest.xml:21:27-74
-29            </intent-filter>
-30        </activity>
-31        <activity
-31-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:29:9-32:66
-32            android:name="com.facebook.FacebookActivity"
-32-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:30:13-57
-33            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-33-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:31:13-96
-34            android:theme="@style/com_facebook_activity_theme" />
-34-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:32:13-63
-35        <activity android:name="com.facebook.CustomTabMainActivity" />
-35-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:33:9-71
-35-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:33:19-68
-36        <activity android:name="com.facebook.CustomTabActivity" />
-36-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:34:9-67
-36-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\a0c25d1319ae8401ec39334586f1034e\facebook-common-4.42.0\AndroidManifest.xml:34:19-64
-37
-38        <provider
-38-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:8:9-11:40
-39            android:name="com.squareup.picasso.PicassoProvider"
-39-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:9:13-64
-40            android:authorities="com.samahmakki.seacrhforbooksandsave.com.squareup.picasso"
-40-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:10:13-72
-41            android:exported="false" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
-41-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\21dfc30a9cba77ccf33b28637af07ae8\picasso-2.71828\AndroidManifest.xml:11:13-37
-42        <activity
-42-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:29:9-33:64
-43            android:name="com.google.android.gms.ads.AdActivity"
-43-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:30:13-65
-44            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-44-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:31:13-122
-45            android:exported="false"
-45-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:32:13-37
-46            android:theme="@android:style/Theme.Translucent" />
-46-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\eeab3b1cad02ed454395916f5f3890fb\play-services-ads-lite-15.0.1\AndroidManifest.xml:33:13-61
-47
-48        <meta-data
-48-->[com.google.android.gms:play-services-basement:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\5a3be19da79cfdbef19a70568cadebea\play-services-basement-15.0.1\AndroidManifest.xml:23:9-25:69
-49            android:name="com.google.android.gms.version"
-49-->[com.google.android.gms:play-services-basement:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\5a3be19da79cfdbef19a70568cadebea\play-services-basement-15.0.1\AndroidManifest.xml:24:13-58
-50            android:value="@integer/google_play_services_version" />
-50-->[com.google.android.gms:play-services-basement:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\5a3be19da79cfdbef19a70568cadebea\play-services-basement-15.0.1\AndroidManifest.xml:25:13-66
-51        <!--
-52         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
-53         with the application context. This config is merged in with the host app's manifest,
-54         but there can only be one provider with the same authority activated at any given
-55         point; so if the end user has two or more different apps that use Facebook SDK, only the
-56         first one will be able to use the provider. To work around this problem, we use the
-57         following placeholder in the authority to identify each host application as if it was
-58         a completely different provider.
-59        -->
-60        <provider
-60-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:39:9-42:40
-61            android:name="com.facebook.internal.FacebookInitProvider"
-61-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:40:13-70
-62            android:authorities="com.samahmakki.seacrhforbooksandsave.FacebookInitProvider"
-62-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:41:13-72
-63            android:exported="false" />
-63-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:42:13-37
-64
-65        <receiver
-65-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:44:9-50:20
-66            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
-66-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:45:13-86
-67            android:exported="false" >
-67-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:46:13-37
-68            <intent-filter>
-68-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:47:13-49:29
-69                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
-69-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:48:17-95
-69-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9278ece0982864483ff5ea7fa70d5ab9\facebook-core-4.42.0\AndroidManifest.xml:48:25-92
-70            </intent-filter>
-71        </receiver>
-72    </application>
-73
-74</manifest>
+12-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:6:5-67
+12-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.WAKE_LOCK" />
+13-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:25:5-68
+13-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:25:22-65
+14    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+14-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:26:5-110
+14-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:26:22-107
+15    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+15-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:26:5-82
+15-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:26:22-79
+16
+17    <application
+17-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:8:5-50:19
+18        android:allowBackup="true"
+18-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:9:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\7162e60636da360fd670aad70bf9109f\core-1.0.0\AndroidManifest.xml:22:18-86
+20        android:icon="@mipmap/icon"
+20-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:10:9-36
+21        android:label="@string/app_name"
+21-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:11:9-41
+22        android:roundIcon="@mipmap/icon"
+22-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:12:9-41
+23        android:supportsRtl="true"
+23-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:13:9-35
+24        android:theme="@style/AppTheme" >
+24-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:14:9-40
+25        <activity
+25-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:15:9-18:20
+26            android:name="com.samahmakki.seacrhforbooksandsave.BookInfoActivity"
+26-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:15:19-51
+27            android:label="@string/book_info"
+27-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:16:13-46
+28            android:parentActivityName="com.samahmakki.seacrhforbooksandsave.MainActivity" >
+28-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:17:13-55
+29        </activity>
+30        <activity
+30-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:19:9-22:68
+31            android:name="com.samahmakki.seacrhforbooksandsave.AuthorsListActivity"
+31-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:20:13-48
+32            android:label="@string/books_list"
+32-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:21:13-47
+33            android:parentActivityName="com.samahmakki.seacrhforbooksandsave.FavoriteAuthorsActivity" />
+33-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:22:13-66
+34        <activity
+34-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:23:9-25:56
+35            android:name="com.samahmakki.seacrhforbooksandsave.rubbish.AuthorsActivity"
+35-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:24:13-52
+36            android:label="@string/favorite_authors" />
+36-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:25:13-53
+37        <activity
+37-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:26:9-29:59
+38            android:name="com.samahmakki.seacrhforbooksandsave.FavoriteAuthorsActivity"
+38-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:27:13-52
+39            android:label="@string/favorite_authors"
+39-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:28:13-53
+40            android:theme="@style/AppTheme.NoActionBar" />
+40-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:29:13-56
+41        <activity
+41-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:30:9-33:59
+42            android:name="com.samahmakki.seacrhforbooksandsave.FavoriteTopicsActivity"
+42-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:31:13-51
+43            android:label="@string/favorite_topics"
+43-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:32:13-52
+44            android:theme="@style/AppTheme.NoActionBar" />
+44-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:33:13-56
+45        <activity
+45-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:34:9-35:50
+46            android:name="com.samahmakki.seacrhforbooksandsave.SavedBooksActivity"
+46-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:34:19-53
+47            android:label="@string/saved_books" />
+47-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:35:13-48
+48        <activity
+48-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:36:9-46:20
+49            android:name="com.samahmakki.seacrhforbooksandsave.MainActivity"
+49-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:37:13-41
+50            android:configChanges="locale|screenSize|orientation"
+50-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:38:13-66
+51            android:label="@string/app_name"
+51-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:39:13-45
+52            android:theme="@style/AppTheme.NoActionBar" >
+52-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:40:13-56
+53            <intent-filter>
+53-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:41:13-45:29
+54                <action android:name="android.intent.action.MAIN" />
+54-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:42:17-69
+54-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:42:25-66
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:44:17-77
+56-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:44:27-74
+57            </intent-filter>
+58        </activity> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+59        <meta-data
+59-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:47:9-49:70
+60            android:name="com.google.android.gms.ads.APPLICATION_ID"
+60-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:48:13-69
+61            android:value="ca-app-pub-3940256099942544/1033173712" />
+61-->D:\Search for books app\search for books under development_3\app\src\main\AndroidManifest.xml:49:13-67
+62
+63        <activity
+63-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:29:9-32:66
+64            android:name="com.facebook.FacebookActivity"
+64-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:30:13-57
+65            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+65-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:31:13-96
+66            android:theme="@style/com_facebook_activity_theme" />
+66-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:32:13-63
+67        <activity android:name="com.facebook.CustomTabMainActivity" />
+67-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:33:9-71
+67-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:33:19-68
+68        <activity android:name="com.facebook.CustomTabActivity" />
+68-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:34:9-67
+68-->[com.facebook.android:facebook-common:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ef1adc9441c212d43f8c1b8d96123e14\jetified-facebook-common-4.42.0\AndroidManifest.xml:34:19-64
+69
+70        <provider
+70-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4367862ace8875bf9587a53c7f5c411f\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
+71            android:name="com.squareup.picasso.PicassoProvider"
+71-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4367862ace8875bf9587a53c7f5c411f\jetified-picasso-2.71828\AndroidManifest.xml:9:13-64
+72            android:authorities="com.samahmakki.seacrhforbooksandsave.com.squareup.picasso"
+72-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4367862ace8875bf9587a53c7f5c411f\jetified-picasso-2.71828\AndroidManifest.xml:10:13-72
+73            android:exported="false" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+73-->[com.squareup.picasso:picasso:2.71828] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4367862ace8875bf9587a53c7f5c411f\jetified-picasso-2.71828\AndroidManifest.xml:11:13-37
+74        <activity
+74-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\0a10deae3f56f7ebbf2efa7ae244b546\jetified-play-services-ads-lite-15.0.1\AndroidManifest.xml:29:9-33:64
+75            android:name="com.google.android.gms.ads.AdActivity"
+75-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\0a10deae3f56f7ebbf2efa7ae244b546\jetified-play-services-ads-lite-15.0.1\AndroidManifest.xml:30:13-65
+76            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+76-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\0a10deae3f56f7ebbf2efa7ae244b546\jetified-play-services-ads-lite-15.0.1\AndroidManifest.xml:31:13-122
+77            android:exported="false"
+77-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\0a10deae3f56f7ebbf2efa7ae244b546\jetified-play-services-ads-lite-15.0.1\AndroidManifest.xml:32:13-37
+78            android:theme="@android:style/Theme.Translucent" />
+78-->[com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\0a10deae3f56f7ebbf2efa7ae244b546\jetified-play-services-ads-lite-15.0.1\AndroidManifest.xml:33:13-61
+79
+80        <receiver
+80-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:29:9-33:20
+81            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+81-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:30:13-85
+82            android:enabled="true"
+82-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:31:13-35
+83            android:exported="false" >
+83-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:32:13-37
+84        </receiver>
+85        <receiver
+85-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:34:9-42:20
+86            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+86-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:35:13-100
+87            android:enabled="true"
+87-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:36:13-35
+88            android:exported="true"
+88-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:37:13-36
+89            android:permission="android.permission.INSTALL_PACKAGES" >
+89-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:38:13-69
+90            <intent-filter>
+90-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:39:13-41:29
+91                <action android:name="com.android.vending.INSTALL_REFERRER" />
+91-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:40:17-79
+91-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:40:25-76
+92            </intent-filter>
+93        </receiver>
+94
+95        <service
+95-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:44:9-47:40
+96            android:name="com.google.android.gms.measurement.AppMeasurementService"
+96-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:45:13-84
+97            android:enabled="true"
+97-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:46:13-35
+98            android:exported="false" />
+98-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:47:13-37
+99        <service
+99-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:48:9-52:72
+100            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+100-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:49:13-87
+101            android:enabled="true"
+101-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:50:13-35
+102            android:exported="false"
+102-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:51:13-37
+103            android:permission="android.permission.BIND_JOB_SERVICE" />
+103-->[com.google.android.gms:play-services-measurement:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\6af98df3ae2e9eba5027061d10c6b472\jetified-play-services-measurement-17.2.2\AndroidManifest.xml:52:13-69
+104        <service
+104-->[com.google.android.gms:play-services-measurement-api:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4cf11f806248f69485acbfe366b0122b\jetified-play-services-measurement-api-17.2.2\AndroidManifest.xml:27:9-33:19
+105            android:name="com.google.firebase.components.ComponentDiscoveryService"
+105-->[com.google.android.gms:play-services-measurement-api:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4cf11f806248f69485acbfe366b0122b\jetified-play-services-measurement-api-17.2.2\AndroidManifest.xml:28:13-84
+106            android:directBootAware="true"
+106-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9f50104a3ed305ca2fc55bd80a29800d\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
+107            android:exported="false" >
+107-->[com.google.android.gms:play-services-measurement-api:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4cf11f806248f69485acbfe366b0122b\jetified-play-services-measurement-api-17.2.2\AndroidManifest.xml:29:13-37
+108            <meta-data
+108-->[com.google.android.gms:play-services-measurement-api:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4cf11f806248f69485acbfe366b0122b\jetified-play-services-measurement-api-17.2.2\AndroidManifest.xml:30:13-32:85
+109                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+109-->[com.google.android.gms:play-services-measurement-api:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4cf11f806248f69485acbfe366b0122b\jetified-play-services-measurement-api-17.2.2\AndroidManifest.xml:31:17-139
+110                android:value="com.google.firebase.components.ComponentRegistrar" />
+110-->[com.google.android.gms:play-services-measurement-api:17.2.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\4cf11f806248f69485acbfe366b0122b\jetified-play-services-measurement-api-17.2.2\AndroidManifest.xml:32:17-82
+111            <meta-data
+111-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:32:13-34:85
+112                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+112-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:33:17-96
+113                android:value="com.google.firebase.components.ComponentRegistrar" />
+113-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:34:17-82
+114        </service>
+115
+116        <receiver
+116-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:37:9-44:20
+117            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+117-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:38:13-78
+118            android:exported="true"
+118-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:39:13-36
+119            android:permission="com.google.android.c2dm.permission.SEND" >
+119-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:40:13-73
+120            <intent-filter>
+120-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:41:13-43:29
+121                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+121-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:42:17-81
+121-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\3c4e290373603ac47b60cc2b51b68fc3\jetified-firebase-iid-20.0.2\AndroidManifest.xml:42:25-78
+122            </intent-filter>
+123        </receiver>
+124
+125        <provider
+125-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9f50104a3ed305ca2fc55bd80a29800d\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
+126            android:name="com.google.firebase.provider.FirebaseInitProvider"
+126-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9f50104a3ed305ca2fc55bd80a29800d\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
+127            android:authorities="com.samahmakki.seacrhforbooksandsave.firebaseinitprovider"
+127-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9f50104a3ed305ca2fc55bd80a29800d\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
+128            android:exported="false"
+128-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9f50104a3ed305ca2fc55bd80a29800d\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
+129            android:initOrder="100" />
+129-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\9f50104a3ed305ca2fc55bd80a29800d\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
+130
+131        <activity
+131-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d7df73591dc571468c186fdd2a992bad\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+132            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+132-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d7df73591dc571468c186fdd2a992bad\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+133            android:exported="false"
+133-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d7df73591dc571468c186fdd2a992bad\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+134            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+134-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d7df73591dc571468c186fdd2a992bad\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+135
+136        <meta-data
+136-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ad072bd06501b4ced252e97ed9ee745e\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+137            android:name="com.google.android.gms.version"
+137-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ad072bd06501b4ced252e97ed9ee745e\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+138            android:value="@integer/google_play_services_version" />
+138-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\ad072bd06501b4ced252e97ed9ee745e\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+139        <!--
+140         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+141         with the application context. This config is merged in with the host app's manifest,
+142         but there can only be one provider with the same authority activated at any given
+143         point; so if the end user has two or more different apps that use Facebook SDK, only the
+144         first one will be able to use the provider. To work around this problem, we use the
+145         following placeholder in the authority to identify each host application as if it was
+146         a completely different provider.
+147        -->
+148        <provider
+148-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:39:9-42:40
+149            android:name="com.facebook.internal.FacebookInitProvider"
+149-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:40:13-70
+150            android:authorities="com.samahmakki.seacrhforbooksandsave.FacebookInitProvider"
+150-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:41:13-72
+151            android:exported="false" />
+151-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:42:13-37
+152
+153        <receiver
+153-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:44:9-50:20
+154            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+154-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:45:13-86
+155            android:exported="false" >
+155-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:46:13-37
+156            <intent-filter>
+156-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:47:13-49:29
+157                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+157-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:48:17-95
+157-->[com.facebook.android:facebook-core:4.42.0] C:\Users\Samah\.gradle\caches\transforms-2\files-2.1\d97be194bf21e299e94f861220212f98\jetified-facebook-core-4.42.0\AndroidManifest.xml:48:25-92
+158            </intent-filter>
+159        </receiver>
+160    </application>
+161
+162</manifest>

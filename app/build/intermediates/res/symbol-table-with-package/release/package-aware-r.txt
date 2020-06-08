@@ -1051,6 +1051,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable books_back
 drawable button_selector
 drawable com_facebook_auth_dialog_background
 drawable com_facebook_auth_dialog_cancel_background
@@ -1080,7 +1081,6 @@ drawable com_facebook_tooltip_blue_background
 drawable com_facebook_tooltip_blue_bottomnub
 drawable com_facebook_tooltip_blue_topnub
 drawable com_facebook_tooltip_blue_xout
-drawable content
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
@@ -1117,7 +1117,6 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
-drawable research
 drawable research_1
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -1236,6 +1235,7 @@ id icon
 id icon_group
 id ifRoom
 id image
+id image_view
 id info
 id inline
 id invisible

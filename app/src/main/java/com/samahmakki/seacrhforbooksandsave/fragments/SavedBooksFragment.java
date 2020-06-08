@@ -6,12 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,8 +18,12 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
+import com.samahmakki.seacrhforbooksandsave.BookInfoActivity;
 import com.samahmakki.seacrhforbooksandsave.R;
 import com.samahmakki.seacrhforbooksandsave.classes.Book;
 import com.samahmakki.seacrhforbooksandsave.classes.BookAdapter;
@@ -42,7 +41,6 @@ public class SavedBooksFragment extends Fragment {
     private BookAdapter mAdapter;
     private TextView mEmptyStateTextView2;
     int selectedItem;
-    Intent intent;
 
     public SavedBooksFragment() {
         // Required empty public constructor
@@ -63,27 +61,25 @@ public class SavedBooksFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_saved_books, container, false);
 
-        AdView mAdView = rootView.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
         return rootView;
     }
 
     @Override
-    public void onViewCreated(@NonNull final View rootView, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View rootView, @Nullable final Bundle savedInstanceState) {
 
         mEmptyStateTextView2 = rootView.findViewById(R.id.saved_empty_view);
         BookDbHelper mBillHelper = new BookDbHelper(rootView.getContext());
-
-
         final SQLiteDatabase db = mBillHelper.getReadableDatabase();
         String[] projection = {
                 BookEntry.COLUMN_Book_NAME,
                 BookEntry.COLUMN_AUTHOR_NAME,
                 BookEntry.COLUMN_BOOK_IMAGE,
                 BookEntry.COLUMN_PUBLISHED_DATE,
-                BookEntry.COLUMN_BOOK_LINK
+                BookEntry.COLUMN_BOOK_LINK,
+                BookEntry.COLUMN_BOOK_DESCRIPTION,
+                BookEntry.COLUMN_BOOK_SALEABILITY,
+                BookEntry.COLUMN_BOOK_BUY_LINK,
+                BookEntry.COLUMN_BOOK_WEB_READER_LINK
         };
 
         Cursor cursor = db.query(
@@ -108,6 +104,10 @@ public class SavedBooksFragment extends Fragment {
             int imageColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_IMAGE);
             int dateColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PUBLISHED_DATE);
             int linkColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_LINK);
+            int descriptionColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_DESCRIPTION);
+            int saleabilityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_SALEABILITY);
+            int buyLinkColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_BUY_LINK);
+            int webReaderLinkColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_WEB_READER_LINK);
 
 
             // Iterate through all the returned rows in the cursor
@@ -116,14 +116,26 @@ public class SavedBooksFragment extends Fragment {
                 // at the current row the cursor is on.
                 String currentBookName = cursor.getString(bookNameColumnIndex);
                 String currentAuthorName = cursor.getString(authorNameColumnIndex);
-                byte[] currentImage = cursor.getBlob(imageColumnIndex);
-
-                Bitmap bitmap = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
-
                 String currentDate = cursor.getString(dateColumnIndex);
                 String currentLink = cursor.getString(linkColumnIndex);
+                String currentDescription = cursor.getString(descriptionColumnIndex);
+                String currentSaleability = cursor.getString(saleabilityColumnIndex);
+                String currentBuyLink = cursor.getString(buyLinkColumnIndex);
+                String currentWebReaderLink = cursor.getString(webReaderLinkColumnIndex);
+                byte[] currentImage = cursor.getBlob(imageColumnIndex);
 
-                BillsItem.add(new Book(currentBookName, bitmap, currentAuthorName, currentDate, currentLink));
+                if (currentImage != null) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
+                    //Bitmap bitmap1 = ImageDecoder.decodeBitmap(ImageDecoder.createSource(ByteBuffer.wrap(currentImage)));
+                    BillsItem.add(new Book(currentBookName, bitmap, currentAuthorName, currentDate, currentLink,
+                            currentDescription, currentSaleability, currentBuyLink, currentWebReaderLink));
+                }
+
+                if (currentImage == null) {
+                    Bitmap bitmap = null;
+                    BillsItem.add(new Book(currentBookName, bitmap, currentAuthorName, currentDate, currentLink,
+                            currentDescription, currentSaleability, currentBuyLink, currentWebReaderLink));
+                }
             }
         } finally {
             // Always close the cursor when you're done reading from it. This releases all its
@@ -135,39 +147,64 @@ public class SavedBooksFragment extends Fragment {
         savedBookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                final PopupMenu popupMenu = new PopupMenu(rootView.getContext(), view);
-                popupMenu.inflate(R.menu.pop_up_menu_saved);
+
+                Book book = (Book) savedBookListView.getItemAtPosition(position);
+                Bitmap bookImage = book.getBitmap();
+                String bookName = book.getBookName();
+                String authorName = book.getAuthorName();
+                String publishedDate = book.getPublishedDate();
+                String description = book.getDescription();
+                String saleability = book.getSaleability();
+                String buyLink = book.getBuyLink();
+                String webReaderLink = book.getWebReaderLink();
+                String previewLink = book.getLink();
+
+                Intent intent = new Intent(getContext(), BookInfoActivity.class);
+                intent.putExtra("bookImage", bookImage);
+                intent.putExtra("bookName", bookName);
+                intent.putExtra("authorName", authorName);
+                intent.putExtra("publishedDate", publishedDate);
+                intent.putExtra("description", description);
+                intent.putExtra("saleability", saleability);
+                intent.putExtra("buyLink", buyLink);
+                intent.putExtra("webReaderLink", webReaderLink);
+                intent.putExtra("previewLink", previewLink);
+                intent.putExtra("Unique", "from_saved_fragment");
+                startActivity(intent);
+            }
+        });
+
+        savedBookListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final PopupMenu popupMenu = new PopupMenu(getContext(), view);
+                popupMenu.inflate(R.menu.menu_book_saved_list);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         selectedItem = item.getItemId();
-                        if (selectedItem == R.id.read) {
-                            Book currentBook = mAdapter.getItem(position);
-                            Uri bookUri = Uri.parse(currentBook.getLink());
-                            Intent websiteIntent = new Intent(Intent.ACTION_VIEW, bookUri);
-                            startActivity(websiteIntent);
-
-                        } else if (selectedItem == R.id.delete) {
+                        if (selectedItem == R.id.delete_2) {
                             showDialogDelete(position);
                         }
                         return true;
                     }
                 });
                 popupMenu.show();
+                return true;
             }
         });
-
         savedBookListView.setEmptyView(mEmptyStateTextView2);
-        mEmptyStateTextView2.setText("No Saved Books Yet...");
+        mEmptyStateTextView2.setText(getResources().getString(R.string.no_Saved_Books_Yet));
 
         super.onViewCreated(rootView, savedInstanceState);
     }
 
     private void showDialogDelete(final int i) {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
-        dialogDelete.setTitle("Delete Book?");
-        dialogDelete.setMessage("Are you sure you want delete this Book?");
-        dialogDelete.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        dialogDelete.setTitle(getResources().getString(R.string.delete_book));
+        dialogDelete.setMessage(getResources().getString(R.string.delete_book_msg));
+        dialogDelete.setPositiveButton(getResources().getString(R.string.ok)
+                , new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
@@ -175,15 +212,16 @@ public class SavedBooksFragment extends Fragment {
                     BookDbHelper bookDbHelper = new BookDbHelper(getContext());
                     bookDbHelper.deleteBook(currentBook.getBookName());
                     mAdapter.remove(currentBook);
-                    Toast.makeText(getContext(), "Deleted", Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e){
-                    Log.e("error",e.getMessage());
+                    Toast.makeText(getContext(), getResources().getString(R.string.deleted)
+                            , Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
                 }
 
             }
         });
-        dialogDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        dialogDelete.setNegativeButton(getResources().getString(R.string.cancel)
+                , new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -192,6 +230,4 @@ public class SavedBooksFragment extends Fragment {
         });
         dialogDelete.show();
     }
-
-
 }

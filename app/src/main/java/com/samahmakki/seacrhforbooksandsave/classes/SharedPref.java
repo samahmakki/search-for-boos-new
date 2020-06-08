@@ -1,4 +1,4 @@
-package com.daily.reach.sygoal.classes;
+package com.samahmakki.seacrhforbooksandsave.classes;
 
 import android.content.Context;
 import android.content.SharedPreferences;

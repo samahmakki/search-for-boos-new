@@ -8,6 +8,10 @@ public class Book {
     private Bitmap mImage;
     private String mPublishedDate;
     private String mLink;
+    private String mDescription;
+    private String mSaleability;
+    private String mBuyLink;
+    private String mWebReaderLink;
 
     public Book(String bookName, Bitmap image, String authorName, String publishedDate, String link){
         mBookName = bookName;
@@ -15,6 +19,26 @@ public class Book {
         mPublishedDate = publishedDate;
         mLink = link;
         mImage = image;
+    }
+
+    public Book(String bookName, Bitmap image, String publishedDate, String link){
+        mBookName = bookName;
+        mPublishedDate = publishedDate;
+        mLink = link;
+        mImage = image;
+    }
+
+    public Book(String bookName, Bitmap image, String authorName, String publishedDate, String link, String description,
+                String saleability, String buyLink, String webReaderLink){
+        mBookName = bookName;
+        mAuthorName = authorName;
+        mPublishedDate = publishedDate;
+        mLink = link;
+        mImage = image;
+        mDescription = description;
+        mSaleability = saleability;
+        mBuyLink = buyLink;
+        mWebReaderLink = webReaderLink;
     }
 
     public String getBookName(){
@@ -35,5 +59,21 @@ public class Book {
 
     public String getLink(){
         return mLink;
+    }
+
+    public String getDescription(){
+        return mDescription;
+    }
+
+    public String getSaleability(){
+        return mSaleability;
+    }
+
+    public String getBuyLink(){
+        return mBuyLink;
+    }
+
+    public String getWebReaderLink(){
+        return mWebReaderLink;
     }
 }

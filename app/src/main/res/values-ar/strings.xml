@@ -1,2 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">البحث عن كتاب</string>
+    <!--Search &amp; Save Books-->
+<!--
+    <string name="API_KEY">AIzaSyBp0F5ojq66frAbbqIK-B_g_9Jgsdgf-5U</string>
+-->
+
+    <string name="banner_ad_unit_id_ac_search">ca-app-pub-1726472410230117/3292272040</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="search">البحث عن كتاب</string>
+    <string name="no_books_found">لم يتم العثور على كتب!</string>
+    <string name="no_internet_connection">لا يوجد اتصال بالإنترنت!</string>
+    <string name="saved_books">الكتب المحفوظة</string>
+    <string name="tools">الأدوات</string>
+    <string name="share">مشاركة التطبيق</string>
+    <string name="rate_s">التقييم</string>
+    <string name="save">حفظ</string>
+    <string name="favorite_authors">الكتاب المفضلين</string>
+    <string name="Settings">الاعدادات</string>
+    <string name="favorite_topics">الموضوعات المفضلة</string>
+    <string name="language">اللغة</string>
+    <string name="night_mode">الوضع الليلي</string>
+    <string name="favorite">المفضلات</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="about">ABOUT</string>
+    <string name="exit">خروج من التطبيق</string>
+    <string name="Quit">هل أنت متأكد من الخروج من التطبيق ؟</string>
+    <string name="Yes">نعم</string>
+    <string name="No">لأ</string>
+    <string name="choose_language">اختر لغة...</string>
+    <string name="Rate_app">تقييم التطبيق</string>
+    <string name="enter_keyword">ادخل كلمة البحث...</string>
+    <string name="read">قراءة مجانية</string>
+    <string name="save_only">حفظ</string>
+    <string name="save_with_specific_author">حفظ الى كاتب محدد</string>
+    <string name="save_to_specific_topic">حفظ الى موضوع محدد</string>
+    <string name="delete">حذف</string>
+    <string name="night_mode_on">تشغيل</string>
+    <string name="night_mode_off">ايقاف</string>
+    <string name="choose_nightMode_state">اختر حالة الوضع الليلي</string>
+    <string name="night_modeOn">تم تشغيل الوضع الليلي</string>
+    <string name="night_modeOff">تم ايقاف الوضع الليلي</string>
+    <string name="books_list">قائمة الكتب</string>
+    <string name="buy">شراء</string>
+    <string name="preview">عرض المعاينة</string>
+    <string name="book_info">معلومات عن الكتاب</string>
+    <string name="no_description_available">لا يوجد وصف متاح</string>
+    <string name="if_you">إذا أعجبك ذلك ، يرجى تقييمه.</string>
+    <string name="Delete_Author">حذف الكاتب؟</string>
+    <string name="Delete_Author_msg">هل أنت متأكد من حذف هذا الكاتب؟ \n حيث سيتم حذف جميع الكتب التي بداخله</string>
+    <string name="ok">نعم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="deleted">تم الحذف</string>
+    <string name="no_Saved_Books_Yet">لا توجد كتب محفوظة بعد ...</string>
+    <string name="delete_book">حذف الكتاب؟</string>
+    <string name="delete_book_msg">هل أنت متأكد من حذف هذا الكتاب؟</string>
+    <string name="save_it_again">أعد الحفظ مرة أخرى</string>
+    <string name="successfully_saved">تم الحفظ بنجاح</string>
+    <string name="type_author_name_again">أعد كتابة اسم الكاتب مرة أخرى</string>
+    <string name="successfully_added">تمت الإضافة بنجاح</string>
+    <string name="add_author_name">أضف اسم الكاتب..</string>
+    <string name="add_topic">أضف موضوع..</string>
+    <string name="type_topic_name_again">أعد كتابة اسم الموضوع مرة أخرى</string>
+    <string name="delete_topic">حذف الموضوع؟</string>
+    <string name="delete_topic_msg">هل أنت متأكد من حذف هذا الموضوع؟ \n حيث سيتم حذف جميع الكتب التي بداخله</string>
+    <string name="from_storage">From Storage</string>
+    <string name="save_from_storage">Save from Storage</string>
+</resources>

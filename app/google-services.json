@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "390515600373",
+    "firebase_url": "https://search-for-books.firebaseio.com",
+    "project_id": "search-for-books",
+    "storage_bucket": "search-for-books.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390515600373:android:60ea8245b1c2365089cebc",
+        "android_client_info": {
+          "package_name": "com.samahmakki.seacrhforbooksandsave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390515600373-k7sc5a3ivqpugdu3u6tcqlc6k2jmallb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOdsNde3bdU8pdy2IyYpUz-7_GOnxVq2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390515600373-k7sc5a3ivqpugdu3u6tcqlc6k2jmallb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

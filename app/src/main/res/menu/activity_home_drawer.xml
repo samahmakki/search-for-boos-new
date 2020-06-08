@@ -5,37 +5,53 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="@string/profile" />
-        <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/ic_person_pin_circle_black_24dp"
-            android:title="@string/tramps" />
-
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_perm_device_information_black_24dp"
-            android:title="@string/about" />
-    <!--    <item
-            android:id="@+id/nav_faq"
-            android:icon="@drawable/ic_info_black_24dp"
-            android:title="FAQ" />-->
-        <item
-            android:id="@+id/nav_homed"
+            android:id="@+id/home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/homed_in_organizations" />
-        <item
-            android:id="@+id/nav_charitable"
-            android:icon="@drawable/ic_account_balance_black_24dp"
-            android:title="@string/charitable_organizations" />
+            android:iconTint="?attr/navigationicon"
+            android:title="@string/home" />
+
 
         <item
-            android:id="@+id/nav_developers"
-            android:icon="@drawable/ic_developer_mode_black_24dp"
-            android:title="@string/developers" />
+            android:id="@+id/saved_books"
+            android:icon="@drawable/ic_save_black_24dp"
+            android:title="@string/saved_books" />
 
     </group>
+
+    <!--<item android:title="@string/from_storage">
+        <menu>
+            <item
+                android:id="@+id/from_storage"
+                android:icon="@drawable/ic_group_black_24dp"
+                android:title="@string/save_from_storage" />
+        </menu>
+    </item>-->
+
+    <!--<item android:title="@string/favorite">
+        <menu>
+            <item
+                android:id="@+id/favorite_authors"
+                android:title="@string/favorite_authors"
+                android:icon="@drawable/ic_group_black_24dp"/>
+            <item
+                android:id="@+id/favorite_topics"
+                android:title="@string/favorite_topics"
+                android:icon="@drawable/ic_library_books_black_24dp"/>
+        </menu>
+    </item>-->
+
+    <item android:title="@string/Settings">
+        <menu>
+            <item
+                android:id="@+id/language"
+                android:icon="@drawable/ic_language_black_24dp"
+                android:title="@string/language" />
+            <item
+                android:id="@+id/night_mode"
+                android:icon="@drawable/ic_settings_brightness_black_24dp"
+                android:title="@string/night_mode" />
+        </menu>
+    </item>
 
     <item android:title="@string/tools">
         <menu>
@@ -47,31 +63,15 @@
                 android:id="@+id/nav_rate"
                 android:icon="@drawable/ic_star_half_black_24dp"
                 android:title="@string/rate_s" />
-
-        </menu>
-    </item>
-    <!--<item android:title="Our Donors">
-        <menu>
-            <item
-                android:id="@+id/aDonate"
-                android:icon="@drawable/ic_attach_money_black_24dp"
-                android:title="Donate to watch the video" />
-
-            <item
-                android:id="@+id/nav_supporting"
-                android:icon="@drawable/ic_people_black_24dp"
-                android:title="US SUPPORTING" />
-        </menu>
-    </item>-->
-    <item android:title="@string/sign_out">
-        <menu>
-            <item
-                android:id="@+id/nav_out"
-                android:icon="@drawable/ic_menu_out"
-                android:title="@string/sign_out" />
-
-
         </menu>
     </item>
 
+    <item android:title="@string/exit">
+        <menu>
+            <item
+                android:id="@+id/exit"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="@string/exit" />
+        </menu>
+    </item>
 </menu>

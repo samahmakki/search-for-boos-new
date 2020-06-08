@@ -1,15 +1,72 @@
 <resources>
-    <string name="app_name">Search &amp; Save Books</string>
-    <string name="API_KEY">AIzaSyDKkLTIb1fisAuD8IKRTtXGJEe2DOU6Ge0</string>
-    <string name="no_books_found">No Books Found!</string>
-    <string name="no_internet_connection">No Internet Connection!</string>
+    <string name="app_name">Search For Books</string>
+    <!--Search &amp; Save Books-->
+<!--
+    <string name="API_KEY">AIzaSyBp0F5ojq66frAbbqIK-B_g_9Jgsdgf-5U</string>
+-->
+    <string name="banner_ad_unit_id_ac_search">ca-app-pub-1726472410230117/3292272040</string>
 
-    <string name="banner_ad_unit_id_ac_search">ca-app-pub-5551021180960556/6799457232</string>
-    <string name="banner_ad_unit_id_ac_saved">ca-app-pub-5551021180960556/2860212221</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search Books</string>
-    <string name="saved">Saved Books</string>
-
+    <string name="no_books_found">No Books Found!</string>
+    <string name="no_internet_connection">No Internet Connection!</string>
+    <string name="saved_books">Saved Books</string>
+    <string name="tools">Tools</string>
+    <string name="share">Share</string>
+    <string name="rate_s">Rate Us</string>
+    <string name="save">Save</string>
+    <string name="favorite_authors">Favorite Authors</string>
+    <string name="Settings">Settings</string>
+    <string name="favorite_topics">Favorite Topics</string>
+    <string name="language">Language</string>
+    <string name="night_mode">Night Mode</string>
+    <string name="favorite">Favorites</string>
+    <string name="home">Home</string>
+    <string name="about">ABOUT</string>
+    <string name="exit">Exit</string>
+    <string name="Quit">Are you sure you want to exit?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="choose_language">Choose Language..</string>
+    <string name="Rate_app">Rate App</string>
+    <string name="enter_keyword">Enter a keyword...</string>
+    <string name="read">Free Reading</string>
+    <string name="save_only">Save</string>
+    <string name="save_with_specific_author">Save with specific author</string>
+    <string name="save_to_specific_topic">save to specific topic</string>
+    <string name="delete">Delete</string>
+    <string name="night_mode_on">On</string>
+    <string name="night_mode_off">Off</string>
+    <string name="choose_nightMode_state">Choose Night Mode State</string>
+    <string name="night_modeOn">Night Mode is On</string>
+    <string name="night_modeOff">Night Mode is Off</string>
+    <string name="books_list">Books list</string>
+    <string name="buy">Buy</string>
+    <string name="preview">Preview</string>
+    <string name="book_info">Book info</string>
+    <string name="no_description_available">No description available</string>
+    <string name="if_you">If you liked it, please rate it.</string>
+    <string name="Delete_Author">Delete Author?</string>
+    <string name="Delete_Author_msg">Are you sure you want delete this Author? \n as all books in it will be removed</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="deleted">Deleted</string>
+    <string name="no_Saved_Books_Yet">No Saved Books Yet...</string>
+    <string name="delete_book">Delete Book?</string>
+    <string name="delete_book_msg">Are you sure you want delete this Book?</string>
+    <string name="save_it_again">Save it again</string>
+    <string name="successfully_saved">Successfully saved</string>
+    <string name="type_author_name_again">Type author name again</string>
+    <string name="successfully_added">Successfully added</string>
+    <string name="add_author_name">add author\'s name..</string>
+    <string name="add_topic">add topic..</string>
+    <string name="type_topic_name_again">Type topic name again</string>
+    <string name="delete_topic">Delete Topic?</string>
+    <string name="delete_topic_msg">Are you sure you want delete this Topic? \n as all books in it will be removed</string>
+    <string name="from_storage">From Storage</string>
+    <string name="save_from_storage">Save from Storage</string>
 </resources>

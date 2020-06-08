@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="4dp">
+    android:paddingBottom="4dp"
+    android:background="@drawable/list_item_view">
 
     <TextView
         android:id="@+id/book_name"
@@ -41,18 +42,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/author_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:padding="2dp"
-                android:textColor="#003cf0"
-                android:textSize="15sp"
-                tools:text="author name" />
 
             <TextView
                 android:id="@+id/published_date"

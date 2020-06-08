@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".BookInfoActivity">
+
+  <!--  <item
+        android:id="@+id/save_with_specific_author"
+        android:title="@string/save_with_specific_author"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/save_to_specific_topic"
+        android:title="@string/save_to_specific_topic"
+        app:showAsAction="never" />-->
+    <item
+        android:id="@+id/delete"
+        android:title="@string/delete"
+        app:showAsAction="never" />
+</menu>

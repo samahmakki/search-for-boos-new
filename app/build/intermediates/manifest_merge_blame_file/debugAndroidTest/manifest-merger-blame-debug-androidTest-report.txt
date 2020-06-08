@@ -3,31 +3,31 @@
 3    package="com.samahmakki.seacrhforbooksandsave.test" >
 4
 5    <uses-sdk
-5-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:5:5-74
-6        android:minSdkVersion="19"
-6-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:5:15-41
-7        android:targetSdkVersion="28" />
-7-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:5:42-71
+5-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:5:5-74
+6        android:minSdkVersion="22"
+6-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:5:15-41
+7        android:targetSdkVersion="29" />
+7-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:5:42-71
 8
 9    <instrumentation
-9-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:11:5-15:86
+9-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:11:5-15:86
 10        android:name="android.support.test.runner.AndroidJUnitRunner"
-10-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:11:22-83
+10-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:11:22-83
 11        android:functionalTest="false"
-11-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:14:22-52
+11-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:14:22-52
 12        android:handleProfiling="false"
-12-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:13:22-53
+12-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:13:22-53
 13        android:label="Tests for com.samahmakki.seacrhforbooksandsave"
-13-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:15:22-84
+13-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:15:22-84
 14        android:targetPackage="com.samahmakki.seacrhforbooksandsave" />
-14-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:12:22-82
+14-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:12:22-82
 15
 16    <application android:debuggable="true" >
-16-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:7:5-9:19
-16-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:7:18-43
+16-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:7:5-9:19
+16-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:7:18-43
 17        <uses-library android:name="android.test.runner" />
-17-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:8:9-60
-17-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger6777610239924030373.xml:8:23-57
+17-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:8:9-60
+17-->D:\Search for books app\search for books under development\app\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger5813275780029213906.xml:8:23-57
 18    </application>
 19
 20</manifest>

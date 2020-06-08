@@ -5,32 +5,32 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorName;
+import com.samahmakki.seacrhforbooksandsave.data.BookContract.Topic;
 
 
-public class AuthorNameDbHelper extends SQLiteOpenHelper {
+public class TopicDbHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "author_name.db";
+    private static final String DATABASE_NAME = "topics.db";
 
     private static final int DATABASE_VERSION = 1;
 
 
-    public AuthorNameDbHelper(Context context) {
+    public TopicDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " + AuthorName.TABLE_NAME + " ("
-                + AuthorName._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + AuthorName.COLUMN_AUTHOR_NAME + " TEXT);";
+        String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " + Topic.TABLE_NAME + " ("
+                + Topic._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + Topic.COLUMN_TOPIC + " TEXT);";
 
         db.execSQL(SQL_CREATE_PETS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + AuthorName.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Topic.TABLE_NAME);
         onCreate(db);
     }
 
@@ -40,9 +40,9 @@ public class AuthorNameDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(AuthorName.COLUMN_AUTHOR_NAME, authorName);
+        values.put(Topic.COLUMN_TOPIC, authorName);
 
-        long newRowId = db.insert(AuthorName.TABLE_NAME, null, values);
+        long newRowId = db.insert(Topic.TABLE_NAME, null, values);
 
         db.close();
         return newRowId;
@@ -51,8 +51,8 @@ public class AuthorNameDbHelper extends SQLiteOpenHelper {
     final public void deleteName (String name){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + AuthorName.TABLE_NAME + " WHERE " +
-                AuthorName.COLUMN_AUTHOR_NAME + " = '" + name + "'";
+        String query = "DELETE FROM " + Topic.TABLE_NAME + " WHERE " +
+                Topic.COLUMN_TOPIC + " = '" + name + "'";
         db.execSQL(query);
     }
 }
