@@ -168,29 +168,29 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
         dialogDelete.setMessage(getResources().getString(R.string.delete_topic_msg));
         dialogDelete.setPositiveButton(getResources().getString(R.string.ok)
                 , new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                try {
-                    topic = adapter.getItem(i);
-                    topicDbHelper = new TopicDbHelper(FavoriteTopicsActivity.this);
-                    topicDbHelper.deleteName(topic);
-                    adapter.remove(topic);
-                    Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.deleted)
-                            , Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Log.e("error", e.getMessage());
-                }
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            topic = adapter.getItem(i);
+                            topicDbHelper = new TopicDbHelper(FavoriteTopicsActivity.this);
+                            topicDbHelper.deleteName(topic);
+                            adapter.remove(topic);
+                            Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.deleted)
+                                    , Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Log.e("error", e.getMessage());
+                        }
 
-            }
-        });
+                    }
+                });
         dialogDelete.setNegativeButton(getResources().getString(R.string.cancel)
                 , new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                dialog.dismiss();
-            }
-        });
+                        dialog.dismiss();
+                    }
+                });
         dialogDelete.show();
     }
 
@@ -247,17 +247,16 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
         if (id == R.id.home) {
             Intent it = new Intent(FavoriteTopicsActivity.this, MainActivity.class);
             startActivity(it);
-        }
-        else if (id == R.id.saved_books) {
+        } else if (id == R.id.saved_books) {
             Intent it = new Intent(FavoriteTopicsActivity.this, SavedBooksActivity.class);
             startActivity(it);
-        } /*else if (id == R.id.favorite_authors) {
+        } else if (id == R.id.favorite_authors) {
             Intent it = new Intent(FavoriteTopicsActivity.this, FavoriteAuthorsActivity.class);
             startActivity(it);
         } else if (id == R.id.favorite_topics) {
             Intent it = new Intent(FavoriteTopicsActivity.this, FavoriteTopicsActivity.class);
             startActivity(it);
-        }*/ else if (id == R.id.language) {
+        } else if (id == R.id.language) {
             showChangeLanguageDialog();
         } else if (id == R.id.night_mode) {
             showNightModeDialog();
@@ -282,8 +281,7 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
             AlertDialog dialog = dialogBuilder.create();
             dialog.show();
 
-        }
-        else if (id == R.id.exit) {
+        } else if (id == R.id.exit) {
             // Toast.makeText(appContext, "BAck", Toast.LENGTH_LONG).show();
             AlertDialog.Builder alert = new AlertDialog.Builder(FavoriteTopicsActivity.this);
             alert.setTitle(getString(R.string.app_name));
@@ -319,7 +317,7 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
 
     private void showChangeLanguageDialog() {
         //Array of language to display in alert dialog
-        final String[] listItems = {"English","عربي"};
+        final String[] listItems = {"English", "عربي"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(FavoriteTopicsActivity.this);
         mBuilder.setTitle(R.string.choose_language);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {

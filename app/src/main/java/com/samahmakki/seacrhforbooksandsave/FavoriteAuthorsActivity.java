@@ -2,6 +2,8 @@ package com.samahmakki.seacrhforbooksandsave;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +26,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -31,10 +34,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.google.android.material.navigation.NavigationView;
+import com.samahmakki.seacrhforbooksandsave.classes.AuthorNameCursorAdapter;
 import com.samahmakki.seacrhforbooksandsave.classes.SharedPref;
 import com.samahmakki.seacrhforbooksandsave.data.AuthorNameDbHelper;
+import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorEntry;
 import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorName;
 import com.samahmakki.seacrhforbooksandsave.data.BookDbHelper;
 import com.samahmakki.seacrhforbooksandsave.data.BookDbHelper_2;
@@ -43,19 +51,18 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
-public class FavoriteAuthorsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class FavoriteAuthorsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     ListView authors_name_list;
     ArrayAdapter<String> adapter;
-    EditText authorNameEditText;
     String authorName;
-    AuthorNameDbHelper authorNameDbHelper;
     public static String currentAuthor;
     public static int p;
 
     int selectedItem;
     SharedPref sharedpref;
-    Bitmap bookImage;
+    byte[] bookImage;
     String bookName;
     String publishedDate;
     String description;
@@ -65,7 +72,10 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
     String webReaderLink;
     String previewLink;
 
-   // public static long newRowId;
+    AuthorNameCursorAdapter mAuthorNameCursorAdapter;
+    private static final int AUTHOR_LOADER = 1;
+
+    // public static long newRowId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +96,6 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final ArrayList<String> NameItem = new ArrayList<String>();
-        authors_name_list = findViewById(R.id.auth_list);
-        adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_3, NameItem);
-        authors_name_list.setAdapter(adapter);
-
         ///////////////////////////////////////////////////////////
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -108,65 +113,32 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         add_author_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                // custom dialog
-                final Dialog dialog = new Dialog(FavoriteAuthorsActivity.this);
-                dialog.setContentView(R.layout.add_author);
-                //dialog.setTitle("Add Author");
-
-                // set the custom dialog components - text, image and button
-                authorNameEditText = dialog.findViewById(R.id.add_auth_name);
-
-                Button okButton = dialog.findViewById(R.id.ok_btn);
-                Button cancelButton = dialog.findViewById(R.id.cancel_btn);
-
-                // if button is clicked, close the custom dialog
-                okButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        authorName = authorNameEditText.getText().toString();
-                        if (!authorName.isEmpty()) {
-                            try {
-                                authorNameDbHelper = new AuthorNameDbHelper(FavoriteAuthorsActivity.this);
-                                long newRowId = authorNameDbHelper.insertName(authorName);
-                                adapter.add(authorName);
-                                if (newRowId == -1) {
-                                    Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.type_author_name_again)
-                                            , Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.successfully_saved)
-                                            , Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (Exception e) {
-                                Log.e("error", e.getMessage());
-                            }
-                        }
-
-                        dialog.dismiss();
-                    }
-                });
-
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
+                Intent intent = new Intent(FavoriteAuthorsActivity.this, AddAuthorActivity.class);
+                startActivity(intent);
             }
         });
 
+        authors_name_list = findViewById(R.id.auth_list);
+        mAuthorNameCursorAdapter = new AuthorNameCursorAdapter(this, null);
+        authors_name_list.setAdapter(mAuthorNameCursorAdapter);
+
         authors_name_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view,  int position, final long id) {
                 final PopupMenu popupMenu = new PopupMenu(FavoriteAuthorsActivity.this, view);
                 popupMenu.inflate(R.menu.pop_up_edit_author);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         selectedItem = item.getItemId();
+                        if (selectedItem == R.id.update) {
+                            Intent intent = new Intent(FavoriteAuthorsActivity.this, AddAuthorActivity.class);
+                            Uri contentUri = ContentUris.withAppendedId(AuthorName.CONTENT_URI, id);
+                            intent.setData(contentUri);
+                            startActivity(intent);
+                        }
                         if (selectedItem == R.id.delete) {
-                            showDialogDelete(position);
+                            showDialogDelete(id);
                         }
                         return true;
                     }
@@ -186,7 +158,7 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                 authorName = receivedIntent.getStringExtra("authorName");
                 publishedDate = receivedIntent.getStringExtra("publishedDate");
                 description = receivedIntent.getStringExtra("description");
-                bookImage = receivedIntent.getParcelableExtra("bookImage");
+                bookImage = receivedIntent.getByteArrayExtra("bookImage");
                 saleability = receivedIntent.getStringExtra("saleability");
                 buyLink = receivedIntent.getStringExtra("buyLink");
                 webReaderLink = receivedIntent.getStringExtra("webReaderLink");
@@ -195,23 +167,31 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                 authors_name_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        currentAuthor = adapter.getItem(position);
-                        p = adapter.getPosition(currentAuthor);
-                        BookDbHelper_2 bookDbHelper = new BookDbHelper_2(FavoriteAuthorsActivity.this);
 
-                        long newRowId = bookDbHelper.insertBook(bookName, authorName,
-                                bookImage, publishedDate, previewLink, description, saleability, buyLink, webReaderLink);
+                        // and pet attributes from the editor are the values.
+                        ContentValues values = new ContentValues();
+                        values.put(AuthorEntry.COLUMN_Book_NAME, bookName);
+                        values.put(AuthorEntry.COLUMN_AUTHOR_NAME, authorName);
+                        values.put(AuthorEntry.COLUMN_BOOK_IMAGE, bookImage);
+                        values.put(AuthorEntry.COLUMN_PUBLISHED_DATE, publishedDate);
+                        values.put(AuthorEntry.COLUMN_BOOK_LINK, previewLink);
+                        values.put(AuthorEntry.COLUMN_BOOK_DESCRIPTION, description);
+                        values.put(AuthorEntry.COLUMN_BOOK_SALEABILITY, saleability);
+                        values.put(AuthorEntry.COLUMN_BOOK_BUY_LINK, buyLink);
+                        values.put(AuthorEntry.COLUMN_BOOK_WEB_READER_LINK, webReaderLink);
 
-                        if (newRowId == -1) {
+                        // Insert a new row for pet in the database, returning the ID of that new row.
+                        Uri newUri = getContentResolver().insert(AuthorEntry.CONTENT_URI, values);
+                        // Show a toast message depending on whether or not the insertion was successful
+                        if (newUri == null) {
+                            // If the new content URI is null, then there was an error with insertion.
                             Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.save_it_again)
                                     , Toast.LENGTH_SHORT).show();
-
                         } else {
+                            // Otherwise, the insertion was successful and we can display a toast.
                             Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.successfully_saved)
                                     , Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.successfully_added)
-                                , Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
@@ -220,7 +200,7 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(FavoriteAuthorsActivity.this, AuthorsListActivity.class);
-                       // intent.putExtra("row_id", id);
+                        // intent.putExtra("row_id", id);
                         startActivity(intent);
                         //Toast.makeText(FavoriteAuthorsActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                         //finish();
@@ -240,9 +220,12 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
 
             }
         });
+
+        getSupportLoaderManager().initLoader(AUTHOR_LOADER, null, this);
+
     }
 
-    private void showDialogDelete(final int i) {
+    private void showDialogDelete(final long i) {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(Objects.requireNonNull(FavoriteAuthorsActivity.this));
         dialogDelete.setTitle(getResources().getString(R.string.Delete_Author));
         dialogDelete.setMessage(getResources().getString(R.string.Delete_Author_msg));
@@ -250,12 +233,18 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    authorName = adapter.getItem(i);
-                    authorNameDbHelper = new AuthorNameDbHelper(FavoriteAuthorsActivity.this);
-                    authorNameDbHelper.deleteName(authorName);
-                    adapter.remove(authorName);
-                    Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.deleted)
-                            , Toast.LENGTH_SHORT).show();
+                    Uri contentUri = ContentUris.withAppendedId(AuthorName.CONTENT_URI, i);
+                    int rowsDeleted = getContentResolver().delete(contentUri, null, null);
+                    // Show a toast message depending on whether or not the delete was successful.
+                    if (rowsDeleted == 0) {
+                        // If no rows were deleted, then there was an error with the delete.
+                        Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.not_deleted)
+                                , Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Otherwise, the delete was successful and we can display a toast.
+                        Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.deleted)
+                                , Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -273,12 +262,6 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        Read();
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         final String appUrl = "https://play.google.com/store/apps/details?id=com.samahmakki.seacrhforbooksandsave";
@@ -288,13 +271,13 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         } else if (id == R.id.saved_books) {
             Intent it = new Intent(FavoriteAuthorsActivity.this, SavedBooksActivity.class);
             startActivity(it);
-        } /*else if (id == R.id.favorite_authors) {
+        } else if (id == R.id.favorite_authors) {
             Intent it = new Intent(FavoriteAuthorsActivity.this, FavoriteAuthorsActivity.class);
             startActivity(it);
         } else if (id == R.id.favorite_topics) {
             Intent it = new Intent(FavoriteAuthorsActivity.this, FavoriteTopicsActivity.class);
             startActivity(it);
-        }*/ else if (id == R.id.language) {
+        } else if (id == R.id.language) {
             showChangeLanguageDialog();
 
         } else if (id == R.id.night_mode) {
@@ -321,8 +304,7 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
             AlertDialog dialog = dialogBuilder.create();
             dialog.show();
 
-        }
-        else if (id == R.id.exit) {
+        } else if (id == R.id.exit) {
             // Toast.makeText(appContext, "BAck", Toast.LENGTH_LONG).show();
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     FavoriteAuthorsActivity.this);
@@ -355,46 +337,6 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void Read() {
-        AuthorNameDbHelper authorNameDbHelper = new AuthorNameDbHelper(FavoriteAuthorsActivity.this);
-
-        final SQLiteDatabase db = authorNameDbHelper.getReadableDatabase();
-        String[] projection = {
-                AuthorName.COLUMN_AUTHOR_NAME,
-        };
-
-        Cursor cursor = db.query(
-                AuthorName.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null);
-
-        final ArrayList<String> NameItem = new ArrayList<String>();
-        authors_name_list = findViewById(R.id.auth_list);
-        adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_3, NameItem);
-        authors_name_list.setAdapter(adapter);
-
-        try {
-            // Figure out the index of each column
-            int authorNameColumnIndex = cursor.getColumnIndex(AuthorName.COLUMN_AUTHOR_NAME);
-
-            // Iterate through all the returned rows in the cursor
-            while (cursor.moveToNext()) {
-                // Use that index to extract the String or Int value of the word
-                // at the current row the cursor is on.
-                String currentAuthorName = cursor.getString(authorNameColumnIndex);
-                NameItem.add(currentAuthorName);
-            }
-        } finally {
-            // Always close the cursor when you're done reading from it. This releases all its
-            // resources and makes it invalid.
-            cursor.close();
-        }
     }
 
     private void showChangeLanguageDialog() {
@@ -496,5 +438,32 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         });
         AlertDialog mDialog = mBuilder.create();
         mDialog.show();
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        String[] projection = {
+                AuthorName._ID,
+                AuthorName.COLUMN_AUTHOR_NAME_2,
+        };
+
+        return new CursorLoader(this,
+                AuthorName.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        mAuthorNameCursorAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        mAuthorNameCursorAdapter.swapCursor(null);
+
     }
 }

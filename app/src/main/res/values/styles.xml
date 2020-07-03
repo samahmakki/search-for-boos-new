@@ -217,5 +217,7 @@
         <item name="publishedDateanddesc">#ffffff</item>
         <item name="addButton">#99ccff</item>
     </style>
-
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">#aaa</item>
+    </style>
 </resources>

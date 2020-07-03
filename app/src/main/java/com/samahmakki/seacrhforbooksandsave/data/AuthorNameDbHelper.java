@@ -12,8 +12,7 @@ public class AuthorNameDbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "author_name.db";
 
-    private static final int DATABASE_VERSION = 1;
-
+    private static final int DATABASE_VERSION = 2;
 
     public AuthorNameDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -23,7 +22,7 @@ public class AuthorNameDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " + AuthorName.TABLE_NAME + " ("
                 + AuthorName._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + AuthorName.COLUMN_AUTHOR_NAME + " TEXT);";
+                + AuthorName.COLUMN_AUTHOR_NAME_2 + " TEXT);";
 
         db.execSQL(SQL_CREATE_PETS_TABLE);
     }
@@ -32,27 +31,5 @@ public class AuthorNameDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + AuthorName.TABLE_NAME);
         onCreate(db);
-    }
-
-    //insert data into the Books Table
-
-    final public long insertName (String authorName) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(AuthorName.COLUMN_AUTHOR_NAME, authorName);
-
-        long newRowId = db.insert(AuthorName.TABLE_NAME, null, values);
-
-        db.close();
-        return newRowId;
-    }
-
-    final public void deleteName (String name){
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + AuthorName.TABLE_NAME + " WHERE " +
-                AuthorName.COLUMN_AUTHOR_NAME + " = '" + name + "'";
-        db.execSQL(query);
     }
 }

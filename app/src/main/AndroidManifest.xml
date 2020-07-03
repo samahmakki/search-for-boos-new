@@ -12,14 +12,18 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BookInfoActivity"
-            android:label="@string/book_info"
-            android:parentActivityName=".MainActivity">
+        <activity
+            android:name=".AddAuthorActivity"
+            android:theme="@style/MyDialogTheme">
         </activity>
+        <activity
+            android:name=".BookInfoActivity"
+            android:label="@string/book_info"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".AuthorsListActivity"
             android:label="@string/books_list"
-            android:parentActivityName=".FavoriteAuthorsActivity"/>
+            android:parentActivityName=".FavoriteAuthorsActivity" />
         <activity
             android:name=".rubbish.AuthorsActivity"
             android:label="@string/favorite_authors" />
@@ -31,8 +35,9 @@
             android:name=".FavoriteTopicsActivity"
             android:label="@string/favorite_topics"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SavedBooksActivity"
-            android:label="@string/saved_books"/>
+        <activity
+            android:name=".SavedBooksActivity"
+            android:label="@string/saved_books" />
         <activity
             android:name=".MainActivity"
             android:configChanges="locale|screenSize|orientation"
@@ -47,6 +52,19 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544/1033173712" />
+
+        <provider
+            android:name=".data.BookProvider"
+            android:authorities="com.samahmakki.seacrhforbooksandsave"
+            android:exported="false" />
+        <provider
+            android:name=".data.AuthorNameProvider"
+            android:authorities="com.samahmakki.seacrhforbooksandsave.data"
+            android:exported="false" />
+        <provider
+            android:name=".data.AuthorListProvider"
+            android:authorities="com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorEntry"
+            android:exported="false" />
     </application>
 
 </manifest>

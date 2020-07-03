@@ -27,7 +27,7 @@
         </menu>
     </item>-->
 
-    <!--<item android:title="@string/favorite">
+    <item android:title="@string/favorite">
         <menu>
             <item
                 android:id="@+id/favorite_authors"
@@ -38,7 +38,7 @@
                 android:title="@string/favorite_topics"
                 android:icon="@drawable/ic_library_books_black_24dp"/>
         </menu>
-    </item>-->
+    </item>
 
     <item android:title="@string/Settings">
         <menu>

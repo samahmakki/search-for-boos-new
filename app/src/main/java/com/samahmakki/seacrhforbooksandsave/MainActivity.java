@@ -90,14 +90,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent it = new Intent(MainActivity.this, SavedBooksActivity.class);
             startActivity(it);
         }
-        /*else if (id == R.id.favorite_authors) {
+         else if (id == R.id.favorite_authors) {
             Intent it = new Intent(MainActivity.this, FavoriteAuthorsActivity.class);
             startActivity(it);
         }
         else if (id == R.id.favorite_topics) {
             Intent it = new Intent(MainActivity.this, FavoriteTopicsActivity.class);
             startActivity(it);
-        }*/
+        }
         /*else if (id == R.id.from_storage){
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("document/pdf");

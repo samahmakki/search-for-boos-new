@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Search For Books</string>
-    <!--Search &amp; Save Books-->
-<!--
-    <string name="API_KEY">AIzaSyBp0F5ojq66frAbbqIK-B_g_9Jgsdgf-5U</string>
--->
+
     <string name="banner_ad_unit_id_ac_search">ca-app-pub-1726472410230117/3292272040</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -69,4 +66,18 @@
     <string name="delete_topic_msg">Are you sure you want delete this Topic? \n as all books in it will be removed</string>
     <string name="from_storage">From Storage</string>
     <string name="save_from_storage">Save from Storage</string>
+    <string name="not_deleted">Error with deleting book</string>
+    <string name="update">Update</string>
+
+    <string name="editor_activity_title_new_author">Add Author</string>
+    <string name="editor_activity_title_edit_author">Update Author</string>
+    <string name="editor_update_author_failed">Error with updating author name</string>
+    <string name="editor_update_author_successful">Author name updated</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_books">Delete all Books?</string>
+    <string name="delete_all_books_msg">Are you sure you want delete all Books?</string>
+    <string name="deleted_all_books">Books deleted</string>
+    <string name="not_deleted_all_books">Error with deleting books</string>
+
+
 </resources>

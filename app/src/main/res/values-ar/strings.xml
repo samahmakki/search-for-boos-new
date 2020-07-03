@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">البحث عن كتاب</string>
-    <!--Search &amp; Save Books-->
-<!--
-    <string name="API_KEY">AIzaSyBp0F5ojq66frAbbqIK-B_g_9Jgsdgf-5U</string>
--->
 
     <string name="banner_ad_unit_id_ac_search">ca-app-pub-1726472410230117/3292272040</string>
 
@@ -70,4 +66,15 @@
     <string name="delete_topic_msg">هل أنت متأكد من حذف هذا الموضوع؟ \n حيث سيتم حذف جميع الكتب التي بداخله</string>
     <string name="from_storage">From Storage</string>
     <string name="save_from_storage">Save from Storage</string>
+    <string name="not_deleted">حدث خطأ في حذف الكتاب</string>
+    <string name="update">تحديث</string>
+    <string name="editor_activity_title_new_author">اضافة كاتب</string>
+    <string name="editor_activity_title_edit_author">تعديل اسم الكاتب</string>
+    <string name="editor_update_author_failed">حدث خطأ في تعديل اسم الكاتب</string>
+    <string name="editor_update_author_successful">تم تعديل اسم الكاتب</string>
+    <string name="delete_all">حذف الكل</string>
+    <string name="delete_all_books">حذف جميع الكتب؟</string>
+    <string name="delete_all_books_msg">هل أنت متأكد من حذف جميع الكتب؟ </string>
+    <string name="deleted_all_books">تم الحذف</string>
+    <string name="not_deleted_all_books">حدث خطأ في حذف جميع الكتب</string>
 </resources>

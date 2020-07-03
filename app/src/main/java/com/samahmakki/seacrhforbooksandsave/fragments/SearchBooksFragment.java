@@ -2,11 +2,13 @@ package com.samahmakki.seacrhforbooksandsave.fragments;
 
 
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -41,7 +43,9 @@ import com.samahmakki.seacrhforbooksandsave.classes.Book;
 import com.samahmakki.seacrhforbooksandsave.classes.BookAdapter;
 import com.samahmakki.seacrhforbooksandsave.classes.QueryUtils;
 import com.samahmakki.seacrhforbooksandsave.classes.SharedPref;
+import com.samahmakki.seacrhforbooksandsave.data.BookContract;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -62,6 +66,8 @@ public class SearchBooksFragment extends Fragment {
     ImageView imageView;
     SharedPref sharedpref;
     Button clear_btn;
+    byte[] byteArray;
+    Bitmap bookImage;
 
     public static Book currentBook;
 
@@ -96,8 +102,6 @@ public class SearchBooksFragment extends Fragment {
         searchButton = rootView.findViewById(R.id.search_button);
         keywordEditText = rootView.findViewById(R.id.keyword);
         clear_btn = rootView.findViewById(R.id.clear_txt);
-
-
 
         clear_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,8 +179,9 @@ public class SearchBooksFragment extends Fragment {
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, final int position, final long id) {
+
                 Book book = (Book) bookListView.getItemAtPosition(position);
-                Bitmap bookImage = book.getBitmap();
+                bookImage = book.getBitmap();
                 String bookName = book.getBookName();
                 String authorName = book.getAuthorName();
                 String publishedDate = book.getPublishedDate();
@@ -187,7 +192,19 @@ public class SearchBooksFragment extends Fragment {
                 String previewLink = book.getLink();
 
                 Intent intent = new Intent(getContext(), BookInfoActivity.class);
-                intent.putExtra("bookImage", bookImage);
+                if (bookImage != null){
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bookImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byteArray = stream.toByteArray();
+                } else {
+                    byteArray = null;
+                    /*Bitmap bookImage_2 = BitmapFactory.decodeResource(getResources(), R.drawable.no_cover_thumb);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bookImage_2.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byteArray = stream.toByteArray();*/
+                }
+
+                intent.putExtra("bookImage", byteArray);
                 intent.putExtra("bookName", bookName);
                 intent.putExtra("authorName", authorName);
                 intent.putExtra("publishedDate", publishedDate);
@@ -210,8 +227,7 @@ public class SearchBooksFragment extends Fragment {
             Uri baseUri = Uri.parse(GOOGLE_BOOKS_REQUEST_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
             uriBuilder.appendQueryParameter("q", keyword)
-                    .appendQueryParameter("maxResults", "40")
-                    /*.appendQueryParameter("key", getResources().getString(R.string.API_KEY))*/;
+                    .appendQueryParameter("maxResults", "40");
             task.execute(uriBuilder.build().toString());
         } else {
             loadingIndicator = getActivity().findViewById(R.id.loading_indicator);

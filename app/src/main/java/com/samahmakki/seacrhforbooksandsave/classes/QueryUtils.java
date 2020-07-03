@@ -135,9 +135,11 @@ public final class QueryUtils {
                             }
                         }
                     } else {
-                        //image = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.no_cover_thumb);
-                        /*URL url = new URL("https://photos.google.com/photo/AF1QipPe2HYMc948ZrWFq465IKaopV3i_6xbO3TLaUpz");
-                        image = BitmapFactory.decodeStream(url.openConnection().getInputStream());*/
+                       // image = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.no_cover_thumb);
+
+                        //URL url = new URL("https://photos.google.com/photo/AF1QipPe2HYMc948ZrWFq465IKaopV3i_6xbO3TLaUpz");
+                        //image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        image = null;
                     }
 
                     JSONArray authorsArray = null;
@@ -260,7 +262,7 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        List<Book> books = extractFeatureFromJson(jsonResponse);
+        List<Book> books = extractFeatureFromJson( jsonResponse);
 
         return books;
     }

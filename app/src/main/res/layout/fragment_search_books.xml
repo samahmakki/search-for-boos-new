@@ -13,15 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/ad_View"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id_ac_search"></com.google.android.gms.ads.AdView>
-
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
@@ -124,7 +115,18 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:visibility="invisible" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/ad_View"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ad_unit_id_ac_search"></com.google.android.gms.ads.AdView>
         </RelativeLayout>
+
+
 
     </LinearLayout>
 

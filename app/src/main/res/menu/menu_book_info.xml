@@ -21,7 +21,7 @@
         android:title="@string/save_only"
         app:showAsAction="never" />
 
-    <!--<item
+  <item
         android:id="@+id/save_with_specific_author"
         android:title="@string/save_with_specific_author"
         app:showAsAction="never" />
@@ -29,5 +29,5 @@
     <item
         android:id="@+id/save_to_specific_topic"
         android:title="@string/save_to_specific_topic"
-        app:showAsAction="never" />-->
+        app:showAsAction="never" />
 </menu>
