@@ -58,6 +58,7 @@ public final class QueryUtils {
     private static String saleability;
     private static String buyLink;
     private static String webReaderLink;
+    private static String downloadLink;
     private String url = "https://photos.google.com/photo/AF1QipPe2HYMc948ZrWFq465IKaopV3i_6xbO3TLaUpz";
 
     /**
@@ -115,7 +116,7 @@ public final class QueryUtils {
                     if (volumeInfo.has("description")) {
                         description = volumeInfo.getString("description");
                     } else {
-                       // description = Resources.getSystem().getString(R.string.no_description_available);
+                        // description = Resources.getSystem().getString(R.string.no_description_available);
                         description = "No description available.";
                     }
 
@@ -135,7 +136,7 @@ public final class QueryUtils {
                             }
                         }
                     } else {
-                       // image = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.no_cover_thumb);
+                        // image = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.no_cover_thumb);
 
                         //URL url = new URL("https://photos.google.com/photo/AF1QipPe2HYMc948ZrWFq465IKaopV3i_6xbO3TLaUpz");
                         //image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -169,6 +170,7 @@ public final class QueryUtils {
                             StringBuilder pLink = new StringBuilder(previewLink);
                             if (pLink.charAt(4) != 's') {
                                 pLink.insert(4, 's');
+                                pLink.append("f=true");
                                 previewLink = pLink.toString();
                             }
                         } catch (Exception e) {
@@ -177,7 +179,6 @@ public final class QueryUtils {
                     } else {
                         previewLink = null;
                     }
-
 
                     buyLink = null;
                     saleability = null;
@@ -209,6 +210,8 @@ public final class QueryUtils {
                     }
 
                     webReaderLink = null;
+                    JSONObject pdf;
+                    downloadLink = null;
                     if (currentBook.has("accessInfo")) {
                         JSONObject accessInfo = currentBook.getJSONObject("accessInfo");
                         if (accessInfo.has("webReaderLink")) {
@@ -225,11 +228,34 @@ public final class QueryUtils {
                         } else {
                             webReaderLink = previewLink;
                         }
+
+                        if (accessInfo.has("pdf")) {
+                             pdf = accessInfo.getJSONObject("pdf");
+                            if (pdf.has("downloadLink")) {
+                                downloadLink = pdf.getString("downloadLink");
+                                try {
+                                    StringBuilder downLink = new StringBuilder(downloadLink);
+                                    if (downLink.charAt(4) != 's') {
+                                        downLink.insert(4, 's');
+                                        downloadLink = downLink.toString();
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println(e);
+                                }
+                            } else {
+                                downloadLink = null;
+                            }
+                        } else {
+                            pdf = null;
+                            downloadLink = null;
+                        }
                     } else {
                         webReaderLink = previewLink;
+                        pdf = null;
+                        downloadLink = null;
                     }
                     Book book = new Book(bookName, image, authorName, publishedDate, previewLink,
-                            description, saleability, buyLink, webReaderLink);
+                            description, saleability, buyLink, webReaderLink, downloadLink);
 
                     // Add the new {@link Earthquake} to the list of earthquakes.
                     books.add(book);
@@ -247,6 +273,13 @@ public final class QueryUtils {
         return books;
     }
 
+    public static String replaceLastFive(String s) {
+        int length = s.length();
+        //Check whether or not the string contains at least four characters; if not, this method is useless
+        //if (length < 5) return "Error: The provided string is not greater than five characters long.";
+        return s.substring(0, length - 5) + "true";
+    }
+
     /**
      * Query the USGS dataset and return a list of {@link Book} objects.
      */
@@ -262,7 +295,7 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        List<Book> books = extractFeatureFromJson( jsonResponse);
+        List<Book> books = extractFeatureFromJson(jsonResponse);
 
         return books;
     }

@@ -20,6 +20,10 @@
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_library_icon.png.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-xxxhdpi\\library_icon.png"
+    },
+    {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\anim_slide_out_right.xml.flat",
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\anim\\slide_out_right.xml"
     },
@@ -56,8 +60,20 @@
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\layout\\navigation_drawer_fav_auth.xml"
     },
     {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_library_icon.png.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-hdpi\\library_icon.png"
+    },
+    {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_authors.xml.flat",
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\layout\\activity_authors.xml"
+    },
+    {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_main.xml.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\menu\\menu_main.xml"
+    },
+    {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_library_icon.png.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-xxhdpi\\library_icon.png"
     },
     {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_authors_list.xml.flat",
@@ -88,12 +104,12 @@
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\layout\\activity_saved_books.xml"
     },
     {
-        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_search_black_24dp.xml.flat",
-        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\drawable\\ic_search_black_24dp.xml"
-    },
-    {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_book_info_saved.xml.flat",
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\menu\\menu_book_info_saved.xml"
+    },
+    {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_search_black_24dp.xml.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\drawable\\ic_search_black_24dp.xml"
     },
     {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\drawable_type_keyword.xml.flat",
@@ -130,6 +146,14 @@
     {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_library_icon.png.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-xhdpi\\library_icon.png"
+    },
+    {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_library_icon.png.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-mdpi\\library_icon.png"
     },
     {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_save_black_24dp.xml.flat",
@@ -284,6 +308,10 @@
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\drawable\\list_item_add_auth.xml"
     },
     {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_topics_list.xml.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\layout\\activity_topics_list.xml"
+    },
+    {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
@@ -294,5 +322,9 @@
     {
         "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\res\\merged\\debug\\layout_simple_list_item_2.xml.flat",
+        "source": "D:\\Search for books app\\search for books under development_3\\app\\src\\main\\res\\layout\\simple_list_item_2.xml"
     }
 ]

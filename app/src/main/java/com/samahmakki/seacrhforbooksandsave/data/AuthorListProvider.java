@@ -12,6 +12,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.samahmakki.seacrhforbooksandsave.FavoriteAuthorsActivity;
 import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorEntry;
 
 public class AuthorListProvider extends ContentProvider {
@@ -43,12 +44,12 @@ public class AuthorListProvider extends ContentProvider {
 
     /** Tag for the log messages */
     public static final String LOG_TAG = AuthorListProvider.class.getSimpleName();
-    private BookDbHelper_2 mDbHelper;
+    private AuthorListDbHelper mDbHelper;
 
     @Override
     public boolean onCreate() {
         // TODO: Create and initialize a BookDbHelper object to gain access to the pets database.
-        mDbHelper = new BookDbHelper_2(getContext());
+        mDbHelper = new AuthorListDbHelper(getContext());
         // Make sure the variable is a global variable, so it can be referenced from other
         // ContentProvider methods.
         return true;

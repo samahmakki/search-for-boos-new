@@ -14,7 +14,7 @@ public class BookDbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "book.db";
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     public BookDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,8 +32,8 @@ public class BookDbHelper extends SQLiteOpenHelper {
                 + BookEntry.COLUMN_BOOK_SALEABILITY + " TEXT, "
                 + BookEntry.COLUMN_BOOK_BUY_LINK + " TEXT, "
                 + BookEntry.COLUMN_BOOK_WEB_READER_LINK + " TEXT, "
-                + BookEntry.COLUMN_BOOK_LINK + " TEXT);";
-
+                + BookEntry.COLUMN_BOOK_LINK + " TEXT, "
+                + BookEntry.COLUMN_BOOK_DOWNLOAD_LINK + " TEXT);";
         db.execSQL(SQL_CREATE_PETS_TABLE);
     }
 

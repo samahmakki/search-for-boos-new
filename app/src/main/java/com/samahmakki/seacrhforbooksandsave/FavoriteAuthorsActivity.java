@@ -1,7 +1,6 @@
 package com.samahmakki.seacrhforbooksandsave;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -9,8 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,10 +17,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.AdRequest;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,14 +40,11 @@ import androidx.loader.content.Loader;
 
 import com.google.android.material.navigation.NavigationView;
 import com.samahmakki.seacrhforbooksandsave.classes.AuthorNameCursorAdapter;
+import com.samahmakki.seacrhforbooksandsave.classes.Book;
 import com.samahmakki.seacrhforbooksandsave.classes.SharedPref;
-import com.samahmakki.seacrhforbooksandsave.data.AuthorNameDbHelper;
 import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorEntry;
 import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorName;
-import com.samahmakki.seacrhforbooksandsave.data.BookDbHelper;
-import com.samahmakki.seacrhforbooksandsave.data.BookDbHelper_2;
 
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -55,10 +52,8 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         LoaderManager.LoaderCallbacks<Cursor> {
 
     ListView authors_name_list;
-    ArrayAdapter<String> adapter;
     String authorName;
-    public static String currentAuthor;
-    public static int p;
+    public int p;
 
     int selectedItem;
     SharedPref sharedpref;
@@ -71,11 +66,11 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
     String buyLink;
     String webReaderLink;
     String previewLink;
+    String downloadLink;
 
     AuthorNameCursorAdapter mAuthorNameCursorAdapter;
     private static final int AUTHOR_LOADER = 1;
-
-    // public static long newRowId;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +119,7 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
 
         authors_name_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,  int position, final long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
                 final PopupMenu popupMenu = new PopupMenu(FavoriteAuthorsActivity.this, view);
                 popupMenu.inflate(R.menu.pop_up_edit_author);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -138,7 +133,7 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                             startActivity(intent);
                         }
                         if (selectedItem == R.id.delete) {
-                            showDialogDelete(id);
+                            showDialogDelete(id, position);
                         }
                         return true;
                     }
@@ -163,10 +158,13 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                 buyLink = receivedIntent.getStringExtra("buyLink");
                 webReaderLink = receivedIntent.getStringExtra("webReaderLink");
                 previewLink = receivedIntent.getStringExtra("previewLink");
+                downloadLink = receivedIntent.getStringExtra("downloadLink");
 
                 authors_name_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                       p = authors_name_list.getPositionForView(view);
 
                         // and pet attributes from the editor are the values.
                         ContentValues values = new ContentValues();
@@ -179,9 +177,12 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                         values.put(AuthorEntry.COLUMN_BOOK_SALEABILITY, saleability);
                         values.put(AuthorEntry.COLUMN_BOOK_BUY_LINK, buyLink);
                         values.put(AuthorEntry.COLUMN_BOOK_WEB_READER_LINK, webReaderLink);
+                        values.put(AuthorEntry.COLUMN_BOOK_DOWNLOAD_LINK, downloadLink);
+                        values.put(AuthorEntry.AUTHOR_NUMBER, p);
 
                         // Insert a new row for pet in the database, returning the ID of that new row.
                         Uri newUri = getContentResolver().insert(AuthorEntry.CONTENT_URI, values);
+
                         // Show a toast message depending on whether or not the insertion was successful
                         if (newUri == null) {
                             // If the new content URI is null, then there was an error with insertion.
@@ -192,6 +193,21 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                             Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.successfully_saved)
                                     , Toast.LENGTH_SHORT).show();
                         }
+
+                        // Interstitial ads
+                        mInterstitialAd = new InterstitialAd(FavoriteAuthorsActivity.this);
+                        mInterstitialAd.setAdUnitId("ca-app-pub-1726472410230117/7602887849");
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        mInterstitialAd.setAdListener(new AdListener(){
+                            public void onAdLoaded(){
+                                if (mInterstitialAd.isLoaded()) {
+                                    mInterstitialAd.show();
+                                } else {
+                                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                                }
+                            }
+                        });
+
                         finish();
                     }
                 });
@@ -200,32 +216,19 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(FavoriteAuthorsActivity.this, AuthorsListActivity.class);
-                        // intent.putExtra("row_id", id);
+                        intent.putExtra("position", position);
                         startActivity(intent);
-                        //Toast.makeText(FavoriteAuthorsActivity.this, "clicked", Toast.LENGTH_SHORT).show();
-                        //finish();
                     }
                 });
             }
         }
 
-        authors_name_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         getSupportLoaderManager().initLoader(AUTHOR_LOADER, null, this);
 
     }
 
-    private void showDialogDelete(final long i) {
+    private void showDialogDelete(final long i, final int p) {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(Objects.requireNonNull(FavoriteAuthorsActivity.this));
         dialogDelete.setTitle(getResources().getString(R.string.Delete_Author));
         dialogDelete.setMessage(getResources().getString(R.string.Delete_Author_msg));
@@ -235,10 +238,15 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                 try {
                     Uri contentUri = ContentUris.withAppendedId(AuthorName.CONTENT_URI, i);
                     int rowsDeleted = getContentResolver().delete(contentUri, null, null);
+
+                    String selection = AuthorEntry.AUTHOR_NUMBER + " = ?";
+                    String[] selectionArgs = new String[] {String.valueOf(p)};
+                    getContentResolver().delete(AuthorEntry.CONTENT_URI, selection, selectionArgs);
+
                     // Show a toast message depending on whether or not the delete was successful.
                     if (rowsDeleted == 0) {
                         // If no rows were deleted, then there was an error with the delete.
-                        Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.not_deleted)
+                        Toast.makeText(FavoriteAuthorsActivity.this, getResources().getString(R.string.not_deleted_2)
                                 , Toast.LENGTH_SHORT).show();
                     } else {
                         // Otherwise, the delete was successful and we can display a toast.
@@ -317,8 +325,6 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
 
-                           /* finish();
-                            System.exit(0);*/
                             finishAffinity();
                         }
                     });
@@ -339,44 +345,34 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         return true;
     }
 
+    @Override
+    public void applyOverrideConfiguration(Configuration overrideConfiguration) {
+        if (overrideConfiguration != null) {
+            int uiMode = overrideConfiguration.uiMode;
+            overrideConfiguration.setTo(getBaseContext().getResources().getConfiguration());
+            overrideConfiguration.uiMode = uiMode;
+        }
+        super.applyOverrideConfiguration(overrideConfiguration);
+    }
+
     private void showChangeLanguageDialog() {
         //Array of language to display in alert dialog
-        final String[] listItems = {"English", "عربي"};
+        final String[] listItems = {"English", "العربية"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(FavoriteAuthorsActivity.this);
         mBuilder.setTitle(R.string.choose_language);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == 1) {
-                    //Arabic
-                    Locale locale = new Locale("ar");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "ar");
-                    editor.apply();
-                    recreate();
-                    Toast.makeText(FavoriteAuthorsActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
-
-                } else if (which == 0) {
-
+                if (which == 0) {
                     //English
-                    Locale locale = new Locale("en");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "en");
-                    editor.apply();
+                    setLocale("en");
                     recreate();
                     Toast.makeText(FavoriteAuthorsActivity.this, "English Language Selected", Toast.LENGTH_LONG).show();
+                } else if (which == 1) {
+                    //Arabic
+                    setLocale("ar");
+                    recreate();
+                    Toast.makeText(FavoriteAuthorsActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
                 }
                 //dismiss BillAlert dialog when language selected
                 dialog.dismiss();
@@ -408,7 +404,6 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
     public void restartApp() {
         Intent i = new Intent(getApplicationContext(), FavoriteAuthorsActivity.class);
         startActivity(i);
-        // finish();
     }
 
     private void showNightModeDialog() {
@@ -440,6 +435,21 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
         mDialog.show();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
@@ -464,6 +474,5 @@ public class FavoriteAuthorsActivity extends AppCompatActivity implements Naviga
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         mAuthorNameCursorAdapter.swapCursor(null);
-
     }
 }

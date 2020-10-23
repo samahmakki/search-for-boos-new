@@ -1,13 +1,13 @@
 package com.samahmakki.seacrhforbooksandsave;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,14 +15,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -30,26 +29,46 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.navigation.NavigationView;
 import com.samahmakki.seacrhforbooksandsave.classes.SharedPref;
-import com.samahmakki.seacrhforbooksandsave.data.AuthorNameDbHelper;
-import com.samahmakki.seacrhforbooksandsave.data.BookContract.Topic;
-import com.samahmakki.seacrhforbooksandsave.data.TopicDbHelper;
+import com.samahmakki.seacrhforbooksandsave.classes.TopicNameCursorAdapter;
+import com.samahmakki.seacrhforbooksandsave.data.BookContract;
+import com.samahmakki.seacrhforbooksandsave.data.BookContract.TopicEntry;
+import com.samahmakki.seacrhforbooksandsave.data.BookContract.TopicName;
 
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
-public class FavoriteTopicsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    ListView topics_list;
-    ArrayAdapter<String> adapter;
+public class FavoriteTopicsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        LoaderManager.LoaderCallbacks<Cursor> {
 
-    EditText topicsEditText;
-    String topic;
-    TopicDbHelper topicDbHelper;
+    ListView topics_name_list;
+    public int p;
     int selectedItem;
     SharedPref sharedpref;
+
+    String authorName;
+    byte[] bookImage;
+    String bookName;
+    String publishedDate;
+    String description;
+
+    String saleability;
+    String buyLink;
+    String webReaderLink;
+    String previewLink;
+    String downloadLink;
+
+    TopicNameCursorAdapter mTopicNameCursorAdapter;
+    private static final int TOPIC_LOADER = 2;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +89,6 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final ArrayList<String> NameItem = new ArrayList<String>();
-        topics_list = findViewById(R.id.topic_list);
-        adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_3, NameItem);
-        topics_list.setAdapter(adapter);
-
         ///////////////////////////////////////////////////////////
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -92,66 +106,32 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
         add_topic_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                // custom dialog
-                final Dialog dialog = new Dialog(FavoriteTopicsActivity.this);
-                dialog.setContentView(R.layout.add_author);
-                //dialog.setTitle("Add Author");
-
-                // set the custom dialog components - text, image and button
-                topicsEditText = dialog.findViewById(R.id.add_auth_name);
-
-                Button okButton = dialog.findViewById(R.id.ok_btn);
-                Button cancelButton = dialog.findViewById(R.id.cancel_btn);
-
-                // if button is clicked, close the custom dialog
-                okButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        topic = topicsEditText.getText().toString();
-                        if (!topic.isEmpty()) {
-                            try {
-                                topicDbHelper = new TopicDbHelper(FavoriteTopicsActivity.this);
-                                long newRowId = topicDbHelper.insertName(topic);
-                                adapter.add(topic);
-                                if (newRowId == -1) {
-                                    Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.type_topic_name_again)
-                                            , Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.successfully_saved)
-                                            , Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (Exception e) {
-                                Log.e("error", e.getMessage());
-                            }
-                        }
-
-                        dialog.dismiss();
-                    }
-                });
-
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
+                Intent intent = new Intent(FavoriteTopicsActivity.this, AddTopicActivity.class);
+                startActivity(intent);
             }
         });
 
-        topics_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        topics_name_list = findViewById(R.id.topic_list);
+        mTopicNameCursorAdapter = new TopicNameCursorAdapter(this, null);
+        topics_name_list.setAdapter(mTopicNameCursorAdapter);
+
+        topics_name_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
                 final PopupMenu popupMenu = new PopupMenu(FavoriteTopicsActivity.this, view);
                 popupMenu.inflate(R.menu.pop_up_edit_author);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         selectedItem = item.getItemId();
-
+                        if (selectedItem == R.id.update) {
+                            Intent intent = new Intent(FavoriteTopicsActivity.this, AddTopicActivity.class);
+                            Uri contentUri = ContentUris.withAppendedId(TopicName.CONTENT_URI, id);
+                            intent.setData(contentUri);
+                            startActivity(intent);
+                        }
                         if (selectedItem == R.id.delete) {
-                            showDialogDelete(position);
+                            showDialogDelete(id, position);
                         }
                         return true;
                     }
@@ -160,84 +140,127 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
                 return true;
             }
         });
-    }
 
-    private void showDialogDelete(final int i) {
-        AlertDialog.Builder dialogDelete = new AlertDialog.Builder(Objects.requireNonNull(FavoriteTopicsActivity.this));
-        dialogDelete.setTitle(getString(R.string.delete_topic));
-        dialogDelete.setMessage(getResources().getString(R.string.delete_topic_msg));
-        dialogDelete.setPositiveButton(getResources().getString(R.string.ok)
-                , new DialogInterface.OnClickListener() {
+        Intent receivedIntent = getIntent();
+        if (receivedIntent == null) {
+            return;
+        } else if (receivedIntent != null) {
+            String stringData = receivedIntent.getStringExtra("Tag");
+            if (stringData != null && !stringData.isEmpty() && stringData.equals("from_book_info")) {
+                bookName = receivedIntent.getStringExtra("bookName");
+                authorName = receivedIntent.getStringExtra("authorName");
+                publishedDate = receivedIntent.getStringExtra("publishedDate");
+                description = receivedIntent.getStringExtra("description");
+                bookImage = receivedIntent.getByteArrayExtra("bookImage");
+                saleability = receivedIntent.getStringExtra("saleability");
+                buyLink = receivedIntent.getStringExtra("buyLink");
+                webReaderLink = receivedIntent.getStringExtra("webReaderLink");
+                previewLink = receivedIntent.getStringExtra("previewLink");
+                downloadLink = receivedIntent.getStringExtra("downloadLink");
+
+                topics_name_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            topic = adapter.getItem(i);
-                            topicDbHelper = new TopicDbHelper(FavoriteTopicsActivity.this);
-                            topicDbHelper.deleteName(topic);
-                            adapter.remove(topic);
-                            Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.deleted)
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        p = topics_name_list.getPositionForView(view);
+
+                        // and pet attributes from the editor are the values.
+                        ContentValues values = new ContentValues();
+                        values.put(TopicEntry.COLUMN_Book_NAME, bookName);
+                        values.put(TopicEntry.COLUMN_AUTHOR_NAME, authorName);
+                        values.put(TopicEntry.COLUMN_BOOK_IMAGE, bookImage);
+                        values.put(TopicEntry.COLUMN_PUBLISHED_DATE, publishedDate);
+                        values.put(TopicEntry.COLUMN_BOOK_LINK, previewLink);
+                        values.put(TopicEntry.COLUMN_BOOK_DESCRIPTION, description);
+                        values.put(TopicEntry.COLUMN_BOOK_SALEABILITY, saleability);
+                        values.put(TopicEntry.COLUMN_BOOK_BUY_LINK, buyLink);
+                        values.put(TopicEntry.COLUMN_BOOK_WEB_READER_LINK, webReaderLink);
+                        values.put(BookContract.AuthorEntry.COLUMN_BOOK_DOWNLOAD_LINK, downloadLink);
+                        values.put(TopicEntry.TOPIC_NUMBER, p);
+
+                        // Insert a new row for pet in the database, returning the ID of that new row.
+                        Uri newUri = getContentResolver().insert(TopicEntry.CONTENT_URI, values);
+
+                        // Show a toast message depending on whether or not the insertion was successful
+                        if (newUri == null) {
+                            // If the new content URI is null, then there was an error with insertion.
+                            Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.save_it_again)
                                     , Toast.LENGTH_SHORT).show();
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
+                        } else {
+                            // Otherwise, the insertion was successful and we can display a toast.
+                            Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.successfully_saved)
+                                    , Toast.LENGTH_SHORT).show();
                         }
 
+                        // Interstitial ads
+                        mInterstitialAd = new InterstitialAd(FavoriteTopicsActivity.this);
+                        mInterstitialAd.setAdUnitId("ca-app-pub-1726472410230117/7059962367");
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        mInterstitialAd.setAdListener(new AdListener(){
+                            public void onAdLoaded(){
+                                if (mInterstitialAd.isLoaded()) {
+                                    mInterstitialAd.show();
+                                } else {
+                                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                                }
+                            }
+                        });
+
+                        finish();
                     }
                 });
-        dialogDelete.setNegativeButton(getResources().getString(R.string.cancel)
-                , new DialogInterface.OnClickListener() {
+            } else {
+                topics_name_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(FavoriteTopicsActivity.this, TopicsListActivity.class);
+                        intent.putExtra("position", position);
+                        startActivity(intent);
                     }
                 });
-        dialogDelete.show();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Read();
-    }
-
-    private void Read() {
-        topicDbHelper = new TopicDbHelper(FavoriteTopicsActivity.this);
-
-        final SQLiteDatabase db = topicDbHelper.getReadableDatabase();
-        String[] projection = {
-                Topic.COLUMN_TOPIC,
-        };
-
-        Cursor cursor = db.query(
-                Topic.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null);
-
-        final ArrayList<String> NameItem = new ArrayList<String>();
-        topics_list = findViewById(R.id.topic_list);
-        adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_3, NameItem);
-        topics_list.setAdapter(adapter);
-
-        try {
-            // Figure out the index of each column
-            int topicColumnIndex = cursor.getColumnIndex(Topic.COLUMN_TOPIC);
-
-            // Iterate through all the returned rows in the cursor
-            while (cursor.moveToNext()) {
-                // Use that index to extract the String or Int value of the word
-                // at the current row the cursor is on.
-                String currentTopic = cursor.getString(topicColumnIndex);
-                NameItem.add(currentTopic);
             }
-        } finally {
-            // Always close the cursor when you're done reading from it. This releases all its
-            // resources and makes it invalid.
-            cursor.close();
         }
+        getSupportLoaderManager().initLoader(TOPIC_LOADER, null, this);
+    }
+
+    private void showDialogDelete(final long i, final int p) {
+        AlertDialog.Builder dialogDelete = new AlertDialog.Builder(Objects.requireNonNull(FavoriteTopicsActivity.this));
+        dialogDelete.setTitle(getResources().getString(R.string.Delete_Topic));
+        dialogDelete.setMessage(getResources().getString(R.string.Delete_Topic_msg));
+        dialogDelete.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    Uri contentUri = ContentUris.withAppendedId(TopicName.CONTENT_URI, i);
+                    int rowsDeleted = getContentResolver().delete(contentUri, null, null);
+
+                    String selection = TopicEntry.TOPIC_NUMBER + " = ?";
+                    String[] selectionArgs = new String[]{String.valueOf(p)};
+                    getContentResolver().delete(TopicEntry.CONTENT_URI, selection, selectionArgs);
+
+                    // Show a toast message depending on whether or not the delete was successful.
+                    if (rowsDeleted == 0) {
+                        // If no rows were deleted, then there was an error with the delete.
+                        Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.not_deleted_3)
+                                , Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Otherwise, the delete was successful and we can display a toast.
+                        Toast.makeText(FavoriteTopicsActivity.this, getResources().getString(R.string.deleted)
+                                , Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+            }
+        });
+        dialogDelete.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+        dialogDelete.show();
     }
 
     @Override
@@ -293,8 +316,6 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
 
-                           /* finish();
-                            System.exit(0);*/
                             finishAffinity();
                         }
                     });
@@ -315,44 +336,34 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
         return true;
     }
 
+    @Override
+    public void applyOverrideConfiguration(Configuration overrideConfiguration) {
+        if (overrideConfiguration != null) {
+            int uiMode = overrideConfiguration.uiMode;
+            overrideConfiguration.setTo(getBaseContext().getResources().getConfiguration());
+            overrideConfiguration.uiMode = uiMode;
+        }
+        super.applyOverrideConfiguration(overrideConfiguration);
+    }
+
     private void showChangeLanguageDialog() {
         //Array of language to display in alert dialog
-        final String[] listItems = {"English", "عربي"};
+        final String[] listItems = {"English", "العربية"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(FavoriteTopicsActivity.this);
         mBuilder.setTitle(R.string.choose_language);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == 1) {
-                    //Arabic
-                    Locale locale = new Locale("ar");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "ar");
-                    editor.apply();
-                    recreate();
-                    Toast.makeText(FavoriteTopicsActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
-
-                } else if (which == 0) {
-
+                if (which == 0) {
                     //English
-                    Locale locale = new Locale("en");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "en");
-                    editor.apply();
+                    setLocale("en");
                     recreate();
                     Toast.makeText(FavoriteTopicsActivity.this, "English Language Selected", Toast.LENGTH_LONG).show();
+                } else if (which == 1) {
+                    //Arabic
+                    setLocale("ar");
+                    recreate();
+                    Toast.makeText(FavoriteTopicsActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
                 }
                 //dismiss BillAlert dialog when language selected
                 dialog.dismiss();
@@ -384,7 +395,6 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
     public void restartApp() {
         Intent i = new Intent(getApplicationContext(), FavoriteTopicsActivity.class);
         startActivity(i);
-        // finish();
     }
 
     private void showNightModeDialog() {
@@ -414,5 +424,46 @@ public class FavoriteTopicsActivity extends AppCompatActivity implements Navigat
         });
         AlertDialog mDialog = mBuilder.create();
         mDialog.show();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        String[] projection = {
+                TopicName._ID,
+                TopicName.COLUMN_TOPIC_NAME_2,
+        };
+
+        return new CursorLoader(this,
+                TopicName.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        mTopicNameCursorAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        mTopicNameCursorAdapter.swapCursor(null);
     }
 }

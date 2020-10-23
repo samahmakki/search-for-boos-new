@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.samahmakki.seacrhforbooksandsave.R;
 import com.samahmakki.seacrhforbooksandsave.fragments.SavedBooksFragment;
 import com.samahmakki.seacrhforbooksandsave.fragments.SearchBooksFragment;
+import com.samahmakki.seacrhforbooksandsave.fragments.SearchBooksFragment_2;
 
 public class Adapter extends FragmentPagerAdapter {
 

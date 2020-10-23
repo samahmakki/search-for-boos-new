@@ -1,21 +1,18 @@
 package com.samahmakki.seacrhforbooksandsave.fragments;
 
 
-import android.app.Activity;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,21 +31,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.samahmakki.seacrhforbooksandsave.BookInfoActivity;
+import com.samahmakki.seacrhforbooksandsave.FavoriteAuthorsActivity;
 import com.samahmakki.seacrhforbooksandsave.R;
 import com.samahmakki.seacrhforbooksandsave.classes.Book;
 import com.samahmakki.seacrhforbooksandsave.classes.BookAdapter;
 import com.samahmakki.seacrhforbooksandsave.classes.QueryUtils;
 import com.samahmakki.seacrhforbooksandsave.classes.SharedPref;
-import com.samahmakki.seacrhforbooksandsave.data.BookContract;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,14 +59,12 @@ public class SearchBooksFragment extends Fragment {
     ProgressBar loadingIndicator;
     ListView bookListView;
     private String GOOGLE_BOOKS_REQUEST_URL = "https://www.googleapis.com/books/v1/volumes";
-    int selectedItem;
     ImageView imageView;
     SharedPref sharedpref;
     Button clear_btn;
     byte[] byteArray;
     Bitmap bookImage;
-
-    public static Book currentBook;
+    private InterstitialAd mInterstitialAd;
 
     public SearchBooksFragment() {
         // Required empty public constructor
@@ -81,13 +76,12 @@ public class SearchBooksFragment extends Fragment {
         // Inflate the layout for this fragment
         sharedpref = new SharedPref(getContext());//load night mode setting
 
-        // loadLocale();
-
         final View rootView = inflater.inflate(R.layout.fragment_search_books, container, false);
 
-        AdView mAdView = rootView.findViewById(R.id.ad_View);
+        // banner ads
+       /* AdView mAdView = rootView.findViewById(R.id.ad_View);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
         return rootView;
     }
@@ -107,8 +101,10 @@ public class SearchBooksFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 keywordEditText.setText("");
-                if (mAdapter != null)
-                mAdapter.clear();
+                if (mAdapter != null){
+                    mAdapter.clear();
+                    mEmptyStateTextView.setText(R.string.no_books_found);
+                }
             }
         });
 
@@ -165,6 +161,27 @@ public class SearchBooksFragment extends Fragment {
     }
 
     private void Search() {
+        // interstitial ads
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 30s
+                mInterstitialAd = new InterstitialAd(getContext());
+                mInterstitialAd.setAdUnitId("ca-app-pub-1726472410230117/7739159184");
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                mInterstitialAd.setAdListener(new AdListener(){
+                    public void onAdLoaded(){
+                        if (mInterstitialAd.isLoaded()) {
+                            mInterstitialAd.show();
+                        } else {
+                            Log.d("TAG", "The interstitial wasn't loaded yet.");
+                        }
+                    }
+                });
+            }
+        }, 5000);
+
         mEmptyStateTextView = getActivity().findViewById(R.id.empty_view);
         loadingIndicator = getActivity().findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.VISIBLE);
@@ -190,6 +207,7 @@ public class SearchBooksFragment extends Fragment {
                 String buyLink = book.getBuyLink();
                 String webReaderLink = book.getWebReaderLink();
                 String previewLink = book.getLink();
+                String downloadLink = book.getDownloadLink();
 
                 Intent intent = new Intent(getContext(), BookInfoActivity.class);
                 if (bookImage != null){
@@ -213,6 +231,7 @@ public class SearchBooksFragment extends Fragment {
                 intent.putExtra("buyLink", buyLink);
                 intent.putExtra("webReaderLink", webReaderLink);
                 intent.putExtra("previewLink", previewLink);
+                intent.putExtra("downloadLink", downloadLink);
                 intent.putExtra("Unique","from_search_fragment");
                 startActivity(intent);
             }
@@ -252,11 +271,13 @@ public class SearchBooksFragment extends Fragment {
             loadingIndicator.setVisibility(View.GONE);
 
             mAdapter.clear();
-            mEmptyStateTextView.setText(R.string.no_books_found);
 
             if (data != null && !data.isEmpty()) {
                 mAdapter.addAll(data);
             }
+
+            mEmptyStateTextView.setText(R.string.no_books_found);
+
         }
     }
 }

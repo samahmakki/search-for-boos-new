@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -31,7 +33,7 @@ import com.samahmakki.seacrhforbooksandsave.fragments.SavedBooksFragment;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     SharedPref sharedpref;
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -81,20 +83,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
-         final String appUrl = "https://play.google.com/store/apps/details?id=com.samahmakki.seacrhforbooksandsave";
+        final String appUrl = "https://play.google.com/store/apps/details?id=com.samahmakki.seacrhforbooksandsave";
         if (id == R.id.home) {
             Intent it = new Intent(MainActivity.this, MainActivity.class);
             startActivity(it);
-        }
-        else if (id == R.id.saved_books) {
+        } else if (id == R.id.saved_books) {
             Intent it = new Intent(MainActivity.this, SavedBooksActivity.class);
             startActivity(it);
-        }
-         else if (id == R.id.favorite_authors) {
+        } else if (id == R.id.favorite_authors) {
             Intent it = new Intent(MainActivity.this, FavoriteAuthorsActivity.class);
             startActivity(it);
-        }
-        else if (id == R.id.favorite_topics) {
+        } else if (id == R.id.favorite_topics) {
             Intent it = new Intent(MainActivity.this, FavoriteTopicsActivity.class);
             startActivity(it);
         }
@@ -107,8 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }*/
         else if (id == R.id.language) {
             showChangeLanguageDialog();
-        }
-        else if (id == R.id.night_mode) {
+        } else if (id == R.id.night_mode) {
             showNightModeDialog();
         } else if (id == R.id.nav_share) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -131,8 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             AlertDialog dialog = dialogBuilder.create();
             dialog.show();
 
-        }
-        else if (id == R.id.exit) {
+        } else if (id == R.id.exit) {
             // Toast.makeText(appContext, "BAck", Toast.LENGTH_LONG).show();
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     MainActivity.this);
@@ -167,6 +164,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
+    public void applyOverrideConfiguration(Configuration overrideConfiguration) {
+        if (overrideConfiguration != null) {
+            int uiMode = overrideConfiguration.uiMode;
+            overrideConfiguration.setTo(getBaseContext().getResources().getConfiguration());
+            overrideConfiguration.uiMode = uiMode;
+        }
+        super.applyOverrideConfiguration(overrideConfiguration);
+    }
+
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -187,42 +194,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void showChangeLanguageDialog() {
         //Array of language to display in alert dialog
-        final String[] listItems = {"English","عربي"};
+        final String[] listItems = {"English", "العربية"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
         mBuilder.setTitle(R.string.choose_language);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == 1) {
-                    //Arabic
-                    Locale locale = new Locale("ar");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "ar");
-                    editor.apply();
-                    recreate();
-                    Toast.makeText(MainActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
-
-                } else if (which == 0) {
-
+                if (which == 0) {
                     //English
-                    Locale locale = new Locale("en");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "en");
-                    editor.apply();
+                    setLocale("en");
                     recreate();
                     Toast.makeText(MainActivity.this, "English Language Selected", Toast.LENGTH_LONG).show();
+                } else if (which == 1) {
+                    //Arabic
+                    setLocale("ar");
+                    recreate();
+                    Toast.makeText(MainActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
                 }
                 //dismiss BillAlert dialog when language selected
                 dialog.dismiss();
@@ -269,12 +256,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // finish();
     }
 
-    /*@Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            AlertDialog.Builder alert = new AlertDialog.Builder(
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // Toast.makeText(appContext, "BAck", Toast.LENGTH_LONG).show();
+            android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(
                     MainActivity.this);
             alert.setTitle(getString(R.string.app_name));
             // alert.setIcon(R.drawable.ic_logout);
@@ -285,8 +271,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
 
-                           *//* finish();
-                            System.exit(0);*//*
+                           /* finish();
+                            System.exit(0);*/
                             finishAffinity();
                         }
                     });
@@ -315,6 +301,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     });
             alert.show();
+            return true;
         }
-    }*/
+        return super.onKeyDown(keyCode, event);
+    }
 }

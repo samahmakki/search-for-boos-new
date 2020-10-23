@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">البحث عن كتاب</string>
+    <string name="app_name">مكتبتي</string>
 
     <string name="banner_ad_unit_id_ac_search">ca-app-pub-1726472410230117/3292272040</string>
 
@@ -52,7 +52,7 @@
     <string name="ok">نعم</string>
     <string name="cancel">إلغاء</string>
     <string name="deleted">تم الحذف</string>
-    <string name="no_Saved_Books_Yet">لا توجد كتب محفوظة بعد ...</string>
+    <string name="no_Saved_Books_Yet">لم يتم حفظ كتب بعد ...</string>
     <string name="delete_book">حذف الكتاب؟</string>
     <string name="delete_book_msg">هل أنت متأكد من حذف هذا الكتاب؟</string>
     <string name="save_it_again">أعد الحفظ مرة أخرى</string>
@@ -67,6 +67,7 @@
     <string name="from_storage">From Storage</string>
     <string name="save_from_storage">Save from Storage</string>
     <string name="not_deleted">حدث خطأ في حذف الكتاب</string>
+    <string name="not_deleted_2">حدث خطأ في حذف ألكاتب</string>
     <string name="update">تحديث</string>
     <string name="editor_activity_title_new_author">اضافة كاتب</string>
     <string name="editor_activity_title_edit_author">تعديل اسم الكاتب</string>
@@ -77,4 +78,10 @@
     <string name="delete_all_books_msg">هل أنت متأكد من حذف جميع الكتب؟ </string>
     <string name="deleted_all_books">تم الحذف</string>
     <string name="not_deleted_all_books">حدث خطأ في حذف جميع الكتب</string>
+    <string name="editor_activity_title_new_topic">اضافة موضوع</string>
+    <string name="editor_activity_title_edit_topic">تعديل اسم الموضوع</string>
+    <string name="Delete_Topic">حذف الموضوع؟</string>
+    <string name="Delete_Topic_msg">هل أنت متأكد من حذف هذا الموضوع؟ \n حيث سيتم حذف جميع الكتب التي بداخله</string>
+    <string name="not_deleted_3">حدث خطأ في حذف الموضوع</string>
+    <string name="download">Download</string>
 </resources>

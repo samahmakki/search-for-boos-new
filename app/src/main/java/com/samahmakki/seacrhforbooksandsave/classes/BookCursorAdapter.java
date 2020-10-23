@@ -42,6 +42,7 @@ public class BookCursorAdapter extends CursorAdapter {
         String currentAuthorName = cursor.getString(authorNameColumnIndex);
         byte[] currentImage = cursor.getBlob(imageColumnIndex);
         Bitmap bitmap = null;
+
         if (currentImage != null) {
             bitmap = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
         } else {

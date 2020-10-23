@@ -137,6 +137,7 @@ attr buttonCompat
 attr buttonGravity
 attr buttonIconDimen
 attr buttonPanelSideLayout
+attr buttonSize
 attr buttonStyle
 attr buttonStyleSmall
 attr buttonTint
@@ -175,6 +176,7 @@ attr chipStartPadding
 attr chipStrokeColor
 attr chipStrokeWidth
 attr chipStyle
+attr circleCrop
 attr closeIcon
 attr closeIconEnabled
 attr closeIconEndPadding
@@ -197,6 +199,7 @@ attr colorControlNormal
 attr colorError
 attr colorPrimary
 attr colorPrimaryDark
+attr colorScheme
 attr colorSecondary
 attr colorSwitchThumbNormal
 attr com_facebook_auxiliary_view_position
@@ -327,6 +330,8 @@ attr iconStartPadding
 attr iconTint
 attr iconTintMode
 attr iconifiedByDefault
+attr imageAspectRatio
+attr imageAspectRatioAdjust
 attr imageButtonStyle
 attr indeterminateProgressStyle
 attr initialActivityCount
@@ -434,7 +439,9 @@ attr materialButtonStyle
 attr materialCardViewStyle
 attr maxActionInlineWidth
 attr maxButtonHeight
+attr maxHeightPct
 attr maxImageSize
+attr maxWidthPct
 attr measureWithLargestChild
 attr menu
 attr multiChoiceItemLayout
@@ -476,6 +483,11 @@ attr ratingBarStyleIndicator
 attr ratingBarStyleSmall
 attr reverseLayout
 attr rippleColor
+attr sb_handlerColor
+attr sb_horizontal
+attr sb_indicatorColor
+attr sb_indicatorTextColor
+attr scopeUris
 attr scrimAnimationDuration
 attr scrimBackground
 attr scrimVisibleHeightTrigger
@@ -704,6 +716,17 @@ color com_facebook_likeview_text_color
 color com_facebook_messenger_blue
 color com_facebook_send_button_text_color
 color com_smart_login_code
+color common_google_signin_btn_text_dark
+color common_google_signin_btn_text_dark_default
+color common_google_signin_btn_text_dark_disabled
+color common_google_signin_btn_text_dark_focused
+color common_google_signin_btn_text_dark_pressed
+color common_google_signin_btn_text_light
+color common_google_signin_btn_text_light_default
+color common_google_signin_btn_text_light_disabled
+color common_google_signin_btn_text_light_focused
+color common_google_signin_btn_text_light_pressed
+color common_google_signin_btn_tint
 color design_bottom_navigation_shadow_color
 color design_default_color_primary
 color design_default_color_primary_dark
@@ -873,6 +896,8 @@ dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
 dimen activity_horizontal_margin
 dimen activity_vertical_margin
+dimen bannerContentWeight
+dimen bannerWeightSum
 dimen browser_actions_context_menu_max_width
 dimen browser_actions_context_menu_min_padding
 dimen cardview_compat_inset_shadow
@@ -945,6 +970,8 @@ dimen design_tab_scrollable_min_width
 dimen design_tab_text_size
 dimen design_tab_text_size_2line
 dimen design_textinput_caption_translate_y
+dimen dialogHeightPct
+dimen dialogWidthPct
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
 dimen fab_margin
@@ -961,6 +988,8 @@ dimen hint_pressed_alpha_material_light
 dimen item_touch_helper_max_drag_scroll_per_frame
 dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
+dimen minImageHeight
+dimen minImageWidth
 dimen mtrl_bottomappbar_fabOffsetEndMode
 dimen mtrl_bottomappbar_fab_cradle_margin
 dimen mtrl_bottomappbar_fab_cradle_rounded_corner_radius
@@ -1026,6 +1055,7 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen paddingSmall
 dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
@@ -1132,11 +1162,13 @@ drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
 drawable btn_checkbox_unchecked_to_checked_mtrl_animation
+drawable btn_clear
 drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_selector
+drawable collapse
 drawable com_facebook_auth_dialog_background
 drawable com_facebook_auth_dialog_cancel_background
 drawable com_facebook_auth_dialog_header_background
@@ -1165,12 +1197,37 @@ drawable com_facebook_tooltip_blue_background
 drawable com_facebook_tooltip_blue_bottomnub
 drawable com_facebook_tooltip_blue_topnub
 drawable com_facebook_tooltip_blue_xout
+drawable common_full_open_on_phone
+drawable common_google_signin_btn_icon_dark
+drawable common_google_signin_btn_icon_dark_focused
+drawable common_google_signin_btn_icon_dark_normal
+drawable common_google_signin_btn_icon_dark_normal_background
+drawable common_google_signin_btn_icon_disabled
+drawable common_google_signin_btn_icon_light
+drawable common_google_signin_btn_icon_light_focused
+drawable common_google_signin_btn_icon_light_normal
+drawable common_google_signin_btn_icon_light_normal_background
+drawable common_google_signin_btn_text_dark
+drawable common_google_signin_btn_text_dark_focused
+drawable common_google_signin_btn_text_dark_normal
+drawable common_google_signin_btn_text_dark_normal_background
+drawable common_google_signin_btn_text_disabled
+drawable common_google_signin_btn_text_light
+drawable common_google_signin_btn_text_light_focused
+drawable common_google_signin_btn_text_light_normal
+drawable common_google_signin_btn_text_light_normal_background
+drawable default_scroll_handle_bottom
+drawable default_scroll_handle_left
+drawable default_scroll_handle_right
+drawable default_scroll_handle_top
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable googleg_disabled_color_18
+drawable googleg_standard_color_18
 drawable ic_account_circle_black_24dp
 drawable ic_add_circle_black_24dp
 drawable ic_clear_black_24dp
@@ -1192,6 +1249,7 @@ drawable ic_save_black_24dp
 drawable ic_search_black_24dp
 drawable ic_settings_brightness_black_24dp
 drawable ic_star_half_black_24dp
+drawable image_placeholder
 drawable list_item_add_auth
 drawable list_item_add_topic
 drawable list_item_view
@@ -1222,6 +1280,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable read_button
 drawable research_1
+drawable rounded_layout
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable type_keyword
@@ -1281,15 +1340,18 @@ id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
+id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
-id ad_View
 id add
 id add_auth_btn
 id add_auth_name
-id add_topic
+id add_book_btn
 id add_topic_btn
+id add_topic_name
+id adjust_height
+id adjust_width
 id alertTitle
 id all
 id always
@@ -1298,9 +1360,15 @@ id auth_list
 id author_name
 id auto
 id automatic
+id banner_body
+id banner_content_root
+id banner_image
+id banner_root
+id banner_title
 id barrier
 id beginning
 id blocking
+id body_scroll
 id book_image
 id book_image_2
 id book_name
@@ -1317,6 +1385,8 @@ id buy_button
 id cancel_action
 id cancel_btn
 id cancel_button
+id card_content_root
+id card_root
 id center
 id center_horizontal
 id center_vertical
@@ -1328,6 +1398,7 @@ id clear_txt
 id clip_horizontal
 id clip_vertical
 id collapseActionView
+id collapse_button
 id com_facebook_body_frame
 id com_facebook_button_xout
 id com_facebook_device_auth_instructions
@@ -1345,6 +1416,7 @@ id contentPanel
 id coordinator
 id custom
 id customPanel
+id dark
 id decor_content_parent
 id default_activity_button
 id delete
@@ -1361,6 +1433,7 @@ id dimensions
 id direct
 id disableHome
 id display_always
+id download_button
 id drawer_layout
 id edit_query
 id empty_view
@@ -1388,9 +1461,12 @@ id home
 id homeAsUp
 id icon
 id icon_group
+id icon_only
 id ifRoom
 id image
 id imageView
+id image_content_root
+id image_root
 id image_view
 id info
 id inline
@@ -1404,6 +1480,7 @@ id large
 id largeLabel
 id layout
 id left
+id light
 id line1
 id line3
 id linear_layout
@@ -1414,9 +1491,13 @@ id loading_indicator
 id masked
 id media_actions
 id message
+id message_body
+id message_title
 id messenger_send_button
 id middle
 id mini
+id modal_content_root
+id modal_root
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
 id multiply
@@ -1447,6 +1528,7 @@ id parent_matrix
 id percent
 id pin
 id preview_button
+id primary_button
 id progress_bar
 id progress_circular
 id progress_horizontal
@@ -1483,6 +1565,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id secondary_button
 id select_dialog_listview
 id selected
 id shortcut
@@ -1535,6 +1618,7 @@ id toolbar
 id top
 id topPanel
 id topic_list
+id topic_name
 id touch_outside
 id transition_current_scene
 id transition_layout_save
@@ -1551,6 +1635,7 @@ id useLogo
 id view_offset_helper
 id viewpager
 id visible
+id wide
 id withText
 id wrap
 id wrap_content
@@ -1616,6 +1701,7 @@ layout activity_favorite_authors
 layout activity_favorite_topics
 layout activity_main
 layout activity_saved_books
+layout activity_topics_list
 layout add_author
 layout add_topic
 layout app_bar_fav_auth
@@ -1623,9 +1709,13 @@ layout app_bar_fav_top
 layout app_bar_home
 layout app_bar_saved_books
 layout author_list_item
+layout banner
 layout book_list_item
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
+layout card
+layout card_landscape_inner
+layout card_portrait_inner
 layout com_facebook_activity_layout
 layout com_facebook_device_auth_dialog_fragment
 layout com_facebook_login_fragment
@@ -1648,12 +1738,15 @@ layout design_navigation_menu_item
 layout design_text_input_password_icon
 layout fragment_saved_books
 layout fragment_search_books
+layout image
 layout messenger_button_send_blue_large
 layout messenger_button_send_blue_round
 layout messenger_button_send_blue_small
 layout messenger_button_send_white_large
 layout messenger_button_send_white_round
 layout messenger_button_send_white_small
+layout modal
+layout modal_portrait_inner
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
 layout nav_header_home
@@ -1679,6 +1772,7 @@ layout notification_template_part_time
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout simple_list_item_2
 layout simple_list_item_3
 layout support_simple_spinner_dropdown_item
 menu activity_home_drawer
@@ -1686,12 +1780,16 @@ menu menu_book_info
 menu menu_book_info_saved
 menu menu_book_saved_list
 menu menu_delete_all
+menu menu_main
 menu pop_up_edit_author
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap icon
+mipmap library_icon
 string Delete_Author
 string Delete_Author_msg
+string Delete_Topic
+string Delete_Topic_msg
 string No
 string Quit
 string Rate_app
@@ -1725,6 +1823,7 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string about
+string action_settings
 string add_author_name
 string add_topic
 string app_name
@@ -1735,6 +1834,7 @@ string books_list
 string bottom_sheet_behavior
 string buy
 string cancel
+string card_content_descriptor
 string character_counter_content_description
 string character_counter_pattern
 string choose_language
@@ -1762,7 +1862,24 @@ string com_facebook_smart_login_confirmation_cancel
 string com_facebook_smart_login_confirmation_continue_as
 string com_facebook_smart_login_confirmation_title
 string com_facebook_tooltip_default
+string common_google_play_services_enable_button
+string common_google_play_services_enable_text
+string common_google_play_services_enable_title
+string common_google_play_services_install_button
+string common_google_play_services_install_text
+string common_google_play_services_install_title
+string common_google_play_services_notification_channel_name
+string common_google_play_services_notification_ticker
 string common_google_play_services_unknown_issue
+string common_google_play_services_unsupported_text
+string common_google_play_services_update_button
+string common_google_play_services_update_text
+string common_google_play_services_update_title
+string common_google_play_services_updating_text
+string common_google_play_services_wear_update_text
+string common_open_on_phone
+string common_signin_button_text
+string common_signin_button_text_long
 string default_web_client_id
 string delete
 string delete_all
@@ -1774,8 +1891,11 @@ string delete_topic
 string delete_topic_msg
 string deleted
 string deleted_all_books
+string download
 string editor_activity_title_edit_author
+string editor_activity_title_edit_topic
 string editor_activity_title_new_author
+string editor_activity_title_new_topic
 string editor_update_author_failed
 string editor_update_author_successful
 string enter_keyword
@@ -1785,6 +1905,7 @@ string fab_transformation_sheet_behavior
 string favorite
 string favorite_authors
 string favorite_topics
+string fcm_fallback_notification_channel_label
 string firebase_database_url
 string from_storage
 string gcm_defaultSenderId
@@ -1795,11 +1916,16 @@ string google_storage_bucket
 string hide_bottom_view_on_scroll_behavior
 string home
 string if_you
+string interstitial_ad_sample
+string interstitial_ad_unit_id
 string language
 string messenger_send_button_text
+string modal_content_descriptor
+string modal_inner_content_descriptor
 string mtrl_chip_close_icon_content_description
 string navigation_drawer_close
 string navigation_drawer_open
+string next_level
 string night_mode
 string night_modeOff
 string night_modeOn
@@ -1810,6 +1936,8 @@ string no_books_found
 string no_description_available
 string no_internet_connection
 string not_deleted
+string not_deleted_2
+string not_deleted_3
 string not_deleted_all_books
 string ok
 string password_toggle_content_description
@@ -1838,9 +1966,11 @@ string saved_books
 string search
 string search_menu_title
 string share
+string start_level
 string status_bar_notification_info_overflow
 string successfully_added
 string successfully_saved
+string title_activity_main2
 string tools
 string type_author_name_again
 string type_topic_name_again
@@ -2052,6 +2182,21 @@ style CardView_Light
 style CategoryTab
 style CategoryTabTextAppearance
 style CustomActivityAnimation
+style FiamUI
+style FiamUI_Banner
+style FiamUI_Card
+style FiamUI_Card_ActionBar
+style FiamUI_Card_ActionBar_Button
+style FiamUI_Card_ImageView
+style FiamUI_Card_Scroll
+style FiamUI_CollapseButton
+style FiamUI_CollapseButtonBase
+style FiamUI_Modal
+style FiamUI_ModalBody
+style FiamUI_ModalImageView
+style FiamUI_ResizableImageView
+style FiamUI_Text_BannerTitle
+style FiamUI_Text_Title
 style MessengerButton
 style MessengerButton_Blue
 style MessengerButton_Blue_Large
@@ -2439,20 +2584,24 @@ styleable LinearConstraintLayout android_orientation
 styleable LinearLayoutCompat android_gravity android_orientation android_baselineAligned android_baselineAlignedChildIndex android_weightSum divider dividerPadding measureWithLargestChild showDividers
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
 styleable MaterialButton android_insetLeft android_insetRight android_insetTop android_insetBottom backgroundTint backgroundTintMode cornerRadius icon iconGravity iconPadding iconSize iconTint iconTintMode rippleColor strokeColor strokeWidth
 styleable MaterialCardView strokeColor strokeWidth
 styleable MaterialComponentsTheme bottomSheetDialogTheme bottomSheetStyle chipGroupStyle chipStandaloneStyle chipStyle colorAccent colorBackgroundFloating colorPrimary colorPrimaryDark colorSecondary editTextStyle floatingActionButtonStyle materialButtonStyle materialCardViewStyle navigationViewStyle scrimBackground snackbarButtonStyle tabStyle textAppearanceBody1 textAppearanceBody2 textAppearanceButton textAppearanceCaption textAppearanceHeadline1 textAppearanceHeadline2 textAppearanceHeadline3 textAppearanceHeadline4 textAppearanceHeadline5 textAppearanceHeadline6 textAppearanceOverline textAppearanceSubtitle1 textAppearanceSubtitle2 textInputStyle
 styleable MenuGroup android_enabled android_id android_visible android_menuCategory android_orderInCategory android_checkableBehavior
 styleable MenuItem android_icon android_enabled android_id android_checked android_visible android_menuCategory android_orderInCategory android_title android_titleCondensed android_alphabeticShortcut android_numericShortcut android_checkable android_onClick actionLayout actionProviderClass actionViewClass alphabeticModifiers contentDescription iconTint iconTintMode numericModifiers showAsAction tooltipText
 styleable MenuView android_windowAnimationStyle android_itemTextAppearance android_horizontalDivider android_verticalDivider android_headerBackground android_itemBackground android_itemIconDisabledAlpha preserveIconSpacing subMenuArrow
+styleable ModalLayout maxHeightPct maxWidthPct
 styleable NavigationView android_background android_fitsSystemWindows android_maxWidth elevation headerLayout itemBackground itemHorizontalPadding itemIconPadding itemIconTint itemTextAppearance itemTextColor menu
 styleable PopupWindow android_popupBackground android_popupAnimationStyle overlapAnchor
 styleable PopupWindowBackgroundState state_above_anchor
 styleable RecycleListView paddingBottomNoButtons paddingTopNoTitle
 styleable RecyclerView android_orientation android_descendantFocusability fastScrollEnabled fastScrollHorizontalThumbDrawable fastScrollHorizontalTrackDrawable fastScrollVerticalThumbDrawable fastScrollVerticalTrackDrawable layoutManager reverseLayout spanCount stackFromEnd
 styleable ScrimInsetsFrameLayout insetForeground
+styleable ScrollBar sb_handlerColor sb_horizontal sb_indicatorColor sb_indicatorTextColor
 styleable ScrollingViewBehavior_Layout behavior_overlapTop
 styleable SearchView android_focusable android_maxWidth android_inputType android_imeOptions closeIcon commitIcon defaultQueryHint goIcon iconifiedByDefault layout queryBackground queryHint searchHintIcon searchIcon submitBackground suggestionRowLayout voiceIcon
+styleable SignInButton buttonSize colorScheme scopeUris
 styleable Snackbar snackbarButtonStyle snackbarStyle
 styleable SnackbarLayout android_maxWidth elevation maxActionInlineWidth
 styleable Spinner android_entries android_popupBackground android_prompt android_dropDownWidth popupTheme

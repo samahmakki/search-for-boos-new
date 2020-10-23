@@ -10,6 +10,8 @@ import androidx.loader.content.Loader;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,12 +22,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.samahmakki.seacrhforbooksandsave.classes.SharedPref;
 import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorName;
+
+import java.util.Locale;
 
 public class AddAuthorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     EditText authorNameEditText;
     String authorName;
+    SharedPref sharedpref;
 
     /**
      * Content URI for the existing author name (null if it's a new author name)
@@ -36,6 +42,8 @@ public class AddAuthorActivity extends AppCompatActivity implements LoaderManage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
+
         setContentView(R.layout.add_author);
 
         Intent intent = getIntent();
@@ -100,14 +108,40 @@ public class AddAuthorActivity extends AppCompatActivity implements LoaderManage
                 finish();
             }
         });
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
 
+    @Override
+    public void applyOverrideConfiguration(Configuration overrideConfiguration) {
+        if (overrideConfiguration != null) {
+            int uiMode = overrideConfiguration.uiMode;
+            overrideConfiguration.setTo(getBaseContext().getResources().getConfiguration());
+            overrideConfiguration.uiMode = uiMode;
+        }
+        super.applyOverrideConfiguration(overrideConfiguration);
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs", MODE_PRIVATE).edit();
+        editor.putString("Language", lang);
+        editor.apply();
+    }
+
+    public void loadLocale() {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        setLocale(language);
     }
 
     @NonNull

@@ -50,7 +50,6 @@ import java.util.Objects;
 
 public class SavedBooksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, NavigationView.OnNavigationItemSelectedListener {
     ListView savedBookListView;
-    BookAdapter mAdapter;
     private TextView mEmptyStateTextView2;
     int selectedItem;
     DrawerLayout drawer;
@@ -243,6 +242,16 @@ public class SavedBooksActivity extends AppCompatActivity implements LoaderManag
         return true;
     }
 
+    @Override
+    public void applyOverrideConfiguration(Configuration overrideConfiguration) {
+        if (overrideConfiguration != null) {
+            int uiMode = overrideConfiguration.uiMode;
+            overrideConfiguration.setTo(getBaseContext().getResources().getConfiguration());
+            overrideConfiguration.uiMode = uiMode;
+        }
+        super.applyOverrideConfiguration(overrideConfiguration);
+    }
+
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -263,42 +272,22 @@ public class SavedBooksActivity extends AppCompatActivity implements LoaderManag
 
     private void showChangeLanguageDialog() {
         //Array of language to display in alert dialog
-        final String[] listItems = {"English", "عربي"};
+        final String[] listItems = {"English", "العربية"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(SavedBooksActivity.this);
         mBuilder.setTitle(R.string.choose_language);
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == 1) {
-                    //Arabic
-                    Locale locale = new Locale("ar");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "ar");
-                    editor.apply();
-                    recreate();
-                    Toast.makeText(SavedBooksActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
-
-                } else if (which == 0) {
-
+                if (which == 0) {
                     //English
-                    Locale locale = new Locale("en");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources()
-                            .getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs",
-                            MODE_PRIVATE).edit();
-                    editor.putString("Language", "en");
-                    editor.apply();
+                    setLocale("en");
                     recreate();
                     Toast.makeText(SavedBooksActivity.this, "English Language Selected", Toast.LENGTH_LONG).show();
+                } else if (which == 1) {
+                    //Arabic
+                    setLocale("ar");
+                    recreate();
+                    Toast.makeText(SavedBooksActivity.this, "تم إختيار اللغة العربية", Toast.LENGTH_LONG).show();
                 }
                 //dismiss BillAlert dialog when language selected
                 dialog.dismiss();
@@ -390,6 +379,21 @@ public class SavedBooksActivity extends AppCompatActivity implements LoaderManag
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     @NonNull

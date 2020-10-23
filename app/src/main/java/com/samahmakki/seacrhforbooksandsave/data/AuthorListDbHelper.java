@@ -6,13 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 
+import com.samahmakki.seacrhforbooksandsave.FavoriteAuthorsActivity;
+import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorEntry;
+
 import java.io.ByteArrayOutputStream;
 
 public class AuthorListDbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "authorList.db";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "author.db";
 
+    private static final int DATABASE_VERSION = 11;
 
     public AuthorListDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -20,69 +23,26 @@ public class AuthorListDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_PETS_TABLE = "CREATE TABLE " + BookContract.BookEntry.TABLE_NAME + " ("
-                + BookContract.BookEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + BookContract.BookEntry.COLUMN_Book_NAME + " TEXT, "
-                + BookContract.BookEntry.COLUMN_BOOK_IMAGE + " BLOB, "
-                + BookContract.BookEntry.COLUMN_PUBLISHED_DATE + " TEXT, "
-                + BookContract.BookEntry.COLUMN_BOOK_LINK + " TEXT);";
+        String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " + AuthorEntry.TABLE_NAME + " ("
+                + AuthorEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + AuthorEntry.AUTHOR_NUMBER + " INTEGER, "
+                + AuthorEntry.COLUMN_Book_NAME + " TEXT, "
+                + AuthorEntry.COLUMN_AUTHOR_NAME + " TEXT, "
+                + AuthorEntry.COLUMN_BOOK_IMAGE + " BLOB, "
+                + AuthorEntry.COLUMN_PUBLISHED_DATE + " TEXT, "
+                + AuthorEntry.COLUMN_BOOK_DESCRIPTION + " TEXT, "
+                + AuthorEntry.COLUMN_BOOK_SALEABILITY + " TEXT, "
+                + AuthorEntry.COLUMN_BOOK_BUY_LINK + " TEXT, "
+                + AuthorEntry.COLUMN_BOOK_WEB_READER_LINK + " TEXT, "
+                + BookContract.BookEntry.COLUMN_BOOK_LINK + " TEXT, "
+                + BookContract.BookEntry.COLUMN_BOOK_DOWNLOAD_LINK + " TEXT);";
 
         db.execSQL(SQL_CREATE_PETS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + BookContract.BookEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + AuthorEntry.TABLE_NAME);
         onCreate(db);
-    }
-
-    //insert data into the Books Table
-
-    final public long insertBook(String bookName, Bitmap image,
-                                 String date, String link) {
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        long newRowId = 0;
-
-        if (image != null) {
-            image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            SQLiteDatabase db = this.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-
-            values.put(BookContract.BookEntry.COLUMN_Book_NAME, bookName);
-            values.put(BookContract.BookEntry.COLUMN_BOOK_IMAGE, byteArray);
-            values.put(BookContract.BookEntry.COLUMN_PUBLISHED_DATE, date);
-            values.put(BookContract.BookEntry.COLUMN_BOOK_LINK, link);
-
-            newRowId = db.insert(BookContract.BookEntry.TABLE_NAME, null, values);
-
-            db.close();
-        }
-
-        if (image == null) {
-            SQLiteDatabase db = this.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-
-            values.put(BookContract.BookEntry.COLUMN_Book_NAME, bookName);
-            values.put(BookContract.BookEntry.COLUMN_PUBLISHED_DATE, date);
-            values.put(BookContract.BookEntry.COLUMN_BOOK_LINK, link);
-
-            newRowId = db.insert(BookContract.BookEntry.TABLE_NAME, null, values);
-
-            db.close();
-        }
-
-        return newRowId;
-    }
-
-    final public void deleteBook(String name) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + BookContract.BookEntry.TABLE_NAME + " WHERE " +
-                BookContract.BookEntry.COLUMN_Book_NAME + " = '" + name + "'";
-        db.execSQL(query);
     }
 }

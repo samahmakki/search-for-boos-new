@@ -120,5 +120,19 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:gravity="center"
             android:justificationMode="inter_word" />
+
+        <Button
+            android:id="@+id/download_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/download"
+            android:background="@drawable/read_button"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:visibility="invisible"/>
+
     </LinearLayout>
 </ScrollView>

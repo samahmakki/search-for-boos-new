@@ -1,14 +1,16 @@
 package com.samahmakki.seacrhforbooksandsave;
 
+import android.app.Activity;
 import android.app.TaskStackBuilder;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,25 +29,16 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.samahmakki.seacrhforbooksandsave.classes.SharedPref;
-import com.samahmakki.seacrhforbooksandsave.data.BookContract.AuthorEntry;
 import com.samahmakki.seacrhforbooksandsave.data.BookContract.BookEntry;
-import com.samahmakki.seacrhforbooksandsave.data.BookDbHelper;
-import com.samahmakki.seacrhforbooksandsave.data.BookDbHelper_2;
-import com.samahmakki.seacrhforbooksandsave.fragments.SavedBooksFragment;
-import com.samahmakki.seacrhforbooksandsave.fragments.SearchBooksFragment;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 public class BookInfoActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -54,7 +47,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
     TextView authorNameTextView;
     TextView publishedDateTextView;
     TextView descriptionTextView;
-    Button readButton, buyButton, previewButton;
+    Button readButton, buyButton, previewButton, downloadButton;
 
     byte[] bookImage;
     String bookName;
@@ -64,18 +57,16 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
     String saleability;
     String buyLink;
     static String webReaderLink;
+    String downloadLink;
     URL webReaderUrl;
     String previewLink;
     SharedPref sharedpref;
-
     Intent receivedIntent;
-
     Intent intent_2;
     Bitmap imageBitmap;
 
-    public static final int RC_SIGN_IN = 1;
-
     private Uri mCurrentBookUri;
+    private InterstitialAd mInterstitialAd;
 
     private static final int Book_INFO_LOADER = 0;
 
@@ -91,6 +82,8 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
             setTheme(R.style.AppTheme2);
         }
 
+        loadLocale();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_info);
 
@@ -102,6 +95,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
         readButton = findViewById(R.id.read_button);
         buyButton = findViewById(R.id.buy_button);
         previewButton = findViewById(R.id.preview_button);
+        downloadButton = findViewById(R.id.download_button);
 
         receivedIntent = getIntent();
         mCurrentBookUri = receivedIntent.getData();
@@ -116,6 +110,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
             buyLink = receivedIntent.getStringExtra("buyLink");
             webReaderLink = receivedIntent.getStringExtra("webReaderLink");
             previewLink = receivedIntent.getStringExtra("previewLink");
+            downloadLink = receivedIntent.getStringExtra("downloadLink");
 
             if (bookImage != null) {
                 imageBitmap = BitmapFactory.decodeByteArray(bookImage, 0, bookImage.length);
@@ -133,6 +128,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                 readButton.setTextColor(getResources().getColor(R.color.black));
                 buyButton.setTextColor(getResources().getColor(R.color.gray));
                 previewButton.setTextColor(getResources().getColor(R.color.gray));
+                downloadButton.setTextColor(getResources().getColor(R.color.black));
                 readButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -147,7 +143,16 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                         }
                     }
                 });
-
+                downloadButton.setVisibility(View.VISIBLE);
+                downloadButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openOptionsMenu();
+                        Uri bookUri3 = Uri.parse(downloadLink);
+                        Intent websiteIntent3 = new Intent(Intent.ACTION_VIEW, bookUri3);
+                        startActivity(websiteIntent3);
+                    }
+                });
             } else if (saleability.equals("FOR_SALE")) {
                 readButton.setTextColor(getResources().getColor(R.color.gray));
                 buyButton.setTextColor(getResources().getColor(R.color.black));
@@ -177,6 +182,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
 
                     }
                 });
+                downloadButton.setVisibility(View.GONE);
             } else if (saleability.equals("NOT_FOR_SALE")) {
                 readButton.setTextColor(getResources().getColor(R.color.gray));
                 buyButton.setTextColor(getResources().getColor(R.color.gray));
@@ -189,17 +195,22 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                         startActivity(websiteIntent_2);
                     }
                 });
+                downloadButton.setVisibility(View.GONE);
             }
         } else {
             getSupportLoaderManager().initLoader(Book_INFO_LOADER, null, this);
         }
-        try {
-            webReaderUrl = new URL(webReaderLink);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+
+    }
+
+    @Override
+    public void applyOverrideConfiguration(Configuration overrideConfiguration) {
+        if (overrideConfiguration != null) {
+            int uiMode = overrideConfiguration.uiMode;
+            overrideConfiguration.setTo(getBaseContext().getResources().getConfiguration());
+            overrideConfiguration.uiMode = uiMode;
         }
-
-
+        super.applyOverrideConfiguration(overrideConfiguration);
     }
 
     @Override
@@ -237,6 +248,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                 values.put(BookEntry.COLUMN_BOOK_SALEABILITY, saleability);
                 values.put(BookEntry.COLUMN_BOOK_BUY_LINK, buyLink);
                 values.put(BookEntry.COLUMN_BOOK_WEB_READER_LINK, webReaderLink);
+                values.put(BookEntry.COLUMN_BOOK_DOWNLOAD_LINK, downloadLink);
 
                 // Insert a new row for pet in the database, returning the ID of that new row.
                 Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
@@ -252,7 +264,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                 }
                 return true;
 
-            case R.id.save_with_specific_author:
+           case R.id.save_with_specific_author:
                 intent_2 = new Intent(BookInfoActivity.this, FavoriteAuthorsActivity.class);
                 intent_2.putExtra("Tag", "from_book_info");
                 intent_2.putExtra("bookImage", bookImage);
@@ -264,10 +276,23 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                 intent_2.putExtra("buyLink", buyLink);
                 intent_2.putExtra("webReaderLink", webReaderLink);
                 intent_2.putExtra("previewLink", previewLink);
-                startActivityForResult(intent_2, RC_SIGN_IN);
+               intent_2.putExtra("downloadLink", downloadLink);
+               startActivity(intent_2);
                 return true;
             case R.id.save_to_specific_topic:
-                // Do nothing for now
+                Intent intent = new Intent(BookInfoActivity.this, FavoriteTopicsActivity.class);
+                intent.putExtra("Tag", "from_book_info");
+                intent.putExtra("bookImage", bookImage);
+                intent.putExtra("bookName", bookName);
+                intent.putExtra("authorName", authorName);
+                intent.putExtra("publishedDate", publishedDate);
+                intent.putExtra("description", description);
+                intent.putExtra("saleability", saleability);
+                intent.putExtra("buyLink", buyLink);
+                intent.putExtra("webReaderLink", webReaderLink);
+                intent.putExtra("previewLink", previewLink);
+                intent.putExtra("downloadLink", downloadLink);
+                startActivity(intent);
                 return true;
             case R.id.delete:
                 showDialogDelete();
@@ -368,6 +393,24 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
         dialogDelete.show();
     }
 
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("CommonPrefs", MODE_PRIVATE).edit();
+        editor.putString("Language", lang);
+        editor.apply();
+    }
+
+    public void loadLocale() {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        setLocale(language);
+    }
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
@@ -383,7 +426,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                 BookEntry.COLUMN_BOOK_SALEABILITY,
                 BookEntry.COLUMN_BOOK_BUY_LINK,
                 BookEntry.COLUMN_BOOK_WEB_READER_LINK,
-
+                BookEntry.COLUMN_BOOK_DOWNLOAD_LINK,
         };
         return new CursorLoader(this,
                 mCurrentBookUri,
@@ -408,6 +451,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
             int saleabilityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_SALEABILITY);
             int buyLinkColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_BUY_LINK);
             int webReaderLinkColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_WEB_READER_LINK);
+            int downloadLinkColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_DOWNLOAD_LINK);
 
             // Extract out the value from the Cursor for the given column index
             bookName = cursor.getString(bookNameColumnIndex);
@@ -425,6 +469,7 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
             saleability = cursor.getString(saleabilityColumnIndex);
             buyLink = cursor.getString(buyLinkColumnIndex);
             webReaderLink = cursor.getString(webReaderLinkColumnIndex);
+            downloadLink = cursor.getString(downloadLinkColumnIndex);
 
             // Update the views on the screen with the values from the database
             bookNameTextView.setText(bookName);
@@ -450,6 +495,16 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                         Intent websiteIntent2 = new Intent(Intent.ACTION_VIEW, bookUri2);
                         startActivity(websiteIntent2);
                     }
+                }
+            });
+
+            downloadButton.setVisibility(View.VISIBLE);
+            downloadButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri bookUri3 = Uri.parse(downloadLink);
+                    Intent websiteIntent3 = new Intent(Intent.ACTION_VIEW, bookUri3);
+                    startActivity(websiteIntent3);
                 }
             });
 
@@ -482,6 +537,8 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
 
                 }
             });
+            downloadButton.setVisibility(View.GONE);
+
         } else if (saleability.equals("NOT_FOR_SALE")) {
             readButton.setTextColor(getResources().getColor(R.color.gray));
             buyButton.setTextColor(getResources().getColor(R.color.gray));
@@ -494,27 +551,11 @@ public class BookInfoActivity extends AppCompatActivity implements LoaderManager
                     startActivity(websiteIntent_2);
                 }
             });
+            downloadButton.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
     }
-
-   /* @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-            if (resultCode == RESULT_OK) {
-                // Sign-in succeeded, set up the UI
-                Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == RESULT_CANCELED) {
-                // Sign in was canceled by the user, finish the activity
-                Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }
-    }*/
-
 }

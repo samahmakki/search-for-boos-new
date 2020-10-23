@@ -4,7 +4,24 @@
             "outputFile": "D:\\Search for books app\\search for books under development_3\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\62a01de08dea75447ece40fbbb3691b5\\material-1.0.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\163e1e1378cd33fba3e556fcf70b970d\\jetified-firebase-inappmessaging-display-19.1.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,128",
+                        "endColumns": "72,71",
+                        "endOffsets": "123,195"
+                    },
+                    "to": {
+                        "startLines": "19,20",
+                        "startColumns": "4,4",
+                        "startOffsets": "1173,1246",
+                        "endColumns": "72,71",
+                        "endOffsets": "1241,1313"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\ba5b5cb9f8cc79bae3bb420061869364\\material-1.0.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -14,16 +31,16 @@
                         "endOffsets": "110,180,251,323,381,439,548,612,675,847"
                     },
                     "to": {
-                        "startLines": "10,11,12,13,14,15,16,18,19,20",
+                        "startLines": "10,11,12,13,14,15,16,18,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "611,671,741,812,884,942,1000,1109,1173,1236",
-                        "endLines": "10,11,12,13,14,15,17,18,19,23",
+                        "startOffsets": "611,671,741,812,884,942,1000,1109,1318,1381",
+                        "endLines": "10,11,12,13,14,15,17,18,21,25",
                         "endColumns": "59,69,70,71,57,57,10,63,62,10",
-                        "endOffsets": "666,736,807,879,937,995,1104,1168,1231,1403"
+                        "endOffsets": "666,736,807,879,937,995,1104,1168,1376,1548"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\95c27f1e561f59170f577bf124144243\\appcompat-1.1.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Samah\\.gradle\\caches\\transforms-2\\files-2.1\\535be843c23df54b7e7e53a75a3dcdc4\\appcompat-1.1.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

@@ -38,7 +38,14 @@ public class AuthorListCursorAdapter extends CursorAdapter {
 
         String currentBookName = cursor.getString(bookNameColumnIndex);
         byte[] currentImage = cursor.getBlob(imageColumnIndex);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
+        Bitmap bitmap = null;
+
+        if (currentImage != null) {
+            bitmap = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
+        }  else {
+            bitmap = null;
+        }
+
         String currentDate = cursor.getString(dateColumnIndex);
 
         bookNameView.setText(currentBookName);
